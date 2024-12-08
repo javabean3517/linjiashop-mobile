@@ -52,7 +52,7 @@ service.interceptors.response.use(
     }
   },
   error => {
-    console.log('error',JSON.stringify(error))
+    console.log('error',JSON.stringify(error.response.status))
     if (error.response) {
       switch (error.response.status) {
         case 401:
@@ -66,7 +66,7 @@ service.interceptors.response.use(
           return Promise.reject("登录信息失效，自动跳转登录...")
           break;
         case 500:
-          console.log('error',error.response)
+          console.log('error',JSON.stringify(error.response.data.message))
           if(error.response.data.message ) {
             if (error.response.data.message.indexOf('relogin') > -1) {
               console.log('need relogin')
@@ -88,7 +88,7 @@ service.interceptors.response.use(
 
               return Promise.reject(error.response.data.message)
             }else {
-              // Toast.fail(error.response.data.message)
+              Toast.fail(error.response.data.message)
               return Promise.reject(error.response.data.message)
             }
           }

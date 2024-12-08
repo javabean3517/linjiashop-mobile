@@ -1,6 +1,6 @@
 <template>
   <div class="cart" style="background-color: white;">
-    <van-nav-bar
+    <van-nav-bar v-if="isLogin"
             title="购物车"
             left-arrow
             left-text="返回"

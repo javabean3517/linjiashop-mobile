@@ -21,6 +21,16 @@ export default {
       }
     })
   },
+
+  loginByLink:function(link) {
+    return request({
+      url: '/user/loginByLink',
+      method: 'post',
+      params: {
+        "link": link
+      }
+    })
+  },
   sendSmsCode:function(mobile) {
     return request({
       url: '/sendSmsCode',

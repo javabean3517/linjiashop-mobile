@@ -53,10 +53,10 @@ export default {
             console.log('user:'+JSON.stringify(user))
             this.isLogin = user.nickName
             console.log('user:'+this.isLogin)
-            if(!this.isLogin){
-                this.toLogin()
-                return
-            }
+            // if(!this.isLogin){
+            //     this.toLogin()
+            //     return
+            // }
 
             if(this.isLogin) {
                 const that = this

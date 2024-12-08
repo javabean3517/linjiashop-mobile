@@ -117,7 +117,7 @@
       <van-cell icon="down" title="软件下载" is-link @click="logout"/>
 
       <div style="width: 100%; height: 8px; background-color: rgb(245, 245, 245)"></div>
-      <van-cell icon="warning-o" title="退出登录" is-link @click="logout"/>
+      <van-cell icon="warning-o" title="退出登录" is-link @click="onLogout"/>
 
     </van-cell-group>
     <div style="position: absolute; z-index: 999;left: 0;bottom: 0;">

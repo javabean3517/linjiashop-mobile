@@ -1,7 +1,7 @@
 import userApi from '@/api/user'
 import store from '@/store'
 
-import {Cell, CellGroup, Col, Icon, Row, Tabbar, TabbarItem, Toast,Dialog,Image} from 'vant';
+import { Cell, CellGroup, Col, Icon, Row, Tabbar, TabbarItem, Toast, Dialog, Image } from 'vant';
 
 export default {
     components: {
@@ -16,11 +16,11 @@ export default {
         [Dialog.name]: Dialog,
         [Image.name]: Image,
 
-},
+    },
     data() {
         return {
             activeFooter: 3,
-            user:{}
+            user: {}
         }
     },
     mounted() {
@@ -28,11 +28,12 @@ export default {
     },
     methods: {
         init() {
+
             userApi.getUserInfo().then(response => {
                 const url = window.location.href
                 this.user = response.content
                 console.log(JSON.stringify(this.user))
-                store.dispatch('app/toggleUser',response.content)
+                store.dispatch('app/toggleUser', response.content)
                 // if(response.data.refreshWechatInfo === false){
                 //     return ;
                 // }
@@ -46,15 +47,15 @@ export default {
                 //     }
                 // }
             }).catch((err) => {
-                console.log('获取用户基本新失败',err)
-                this.$router.replace({path: 'login', query: {redirect: 'user'}})
+                console.log('获取用户基本新失败', err)
+                this.$router.replace({ path: 'login', query: { redirect: 'user' } })
             })
         },
         sorry() {
             Toast('敬请期待')
         },
         toOrder(status) {
-            this.$router.push({path: 'order', query: {status: status}})
+            this.$router.push({ path: 'order', query: { status: status } })
         },
         processOpenid() {
             let url = window.location.href;
@@ -69,6 +70,21 @@ export default {
             } else {
                 this.redirectForCode();
             }
+        },
+        onLogout() {
+            this.$dialog.confirm({
+                title: '提示',
+                message: '确认退出登录？',
+                confirmButtonColor: '#32AE57'
+            }).then(() => {
+                store.dispatch('app/toggleUser', {})
+                store.dispatch('app/toggleToken', '')
+
+                this.$router.push({ path: '/index' })
+            }).catch(() => {
+                console.log('点击了取消')
+            })
+
         },
         redirectForCode() {
             userApi.getWxSign({
