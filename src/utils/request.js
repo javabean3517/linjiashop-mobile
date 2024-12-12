@@ -22,6 +22,8 @@ service.interceptors.request.use(
   },
   error => {
     // do something with request error
+    console.log(3333333)
+    console.log(JSON.stringify(error))
     return Promise.reject(error)
   }
 )
@@ -39,7 +41,9 @@ service.interceptors.response.use(
    * You can also judge the status by HTTP Status Code
    */
   response => {
-    console.log('response',response)
+    console.log(1111111)
+
+    console.log('response',JSON.stringify(response))
     if(response.headers.token){
       //如果后台通过header返回token，说明token已经更新，则更新客户端本地token
       store.dispatch('app/toggleToken',response.headers.token)
@@ -52,7 +56,10 @@ service.interceptors.response.use(
     }
   },
   error => {
-    console.log('error',JSON.stringify(error.response.status))
+    console.log(22222222222)
+    // const code = error.response.data.status
+
+    console.log(error)
     if (error.response) {
       switch (error.response.status) {
         case 401:
@@ -96,6 +103,15 @@ service.interceptors.response.use(
         default:
           return Promise.reject(error.response.data.message)
       }
+    }else{
+      console.log(11111)
+      store.dispatch('app/toggleUser', {})
+      store.dispatch('app/toggleToken', '')
+      router.replace({
+        path: '/login',
+        query: {redirect: router.currentRoute.path}
+      })
+      return Promise.reject(error.response.data.message)
     }
   }
 )
