@@ -27,6 +27,9 @@ export default {
     },
     data() {
         return {
+            tgCodeDisabled: false,
+            tgLoginDisabled: true,
+            token:'',
             mobile:'',
             smsCode:'',
             password:'',
@@ -38,7 +41,8 @@ export default {
             second: 60,
             activeName : -1,
             active: 0,
-            link:''
+            link:'',
+            tgCode:''
         }
     },
     mounted(){
@@ -61,8 +65,49 @@ export default {
             this.show1 = false;
             this.show2 = true;
         },
-        loginByLink(){
+        toTg(){
+            loginApi.getBotLink().then(res=>{
+                console.log(res.content.token)
+                this.token = res.content.token
+                // window.location.replace()(res.content.link+res.content.token,'_blank')
 
+                setTimeout(() => {
+                    var adPopup = window.open('about:blank', '_blank', 'width=' + window.screen.width + ', height=' + window.screen.height)
+                    adPopup.location = res.content.link+res.content.token;
+                }, 500)
+            })
+           
+        },
+        loginByTg(){
+            console.log(this.tgCode)
+            console.log(this.token)
+
+            if(this.tgCode === ''){
+                Toast({duration:1000,message:'请输入验证码'})
+                return
+            }
+            if(this.token === ''){
+                Toast({duration:1000,message:'请获取验证码'})
+                return
+            }
+            loginApi.loginByTg(this.token,this.tgCode).then(response=>{
+                console.log("response:"+JSON.stringify(response))
+                console.log("content:"+JSON.stringify(response.content))
+
+                store.dispatch('app/toggleToken',response.content.token)
+                store.dispatch('app/toggleUser',response.content)
+                console.log("token:"+response.content.token)
+                this.$router.push({path: '/index'})
+                // if(this.redirect){
+                //     this.$router.push({path: this.redirect})
+                // }else {
+                //     this.$router.push({path: '/index'})
+                // }
+            }).catch( (err) => {
+
+            })
+        },
+        loginByLink(){
             loginApi.loginByLink(this.link).then( response=> {
                 store.dispatch('app/toggleToken',response.content.token)
                 store.dispatch('app/toggleUser',response.content)
@@ -72,7 +117,7 @@ export default {
                 }else {
                     this.$router.push({path: '/index'})
                 }
-            }).then( (err) => {
+            }).catch( (err) => {
                 console.log(233333)
                 this.$dialog.showToast(err)
             })

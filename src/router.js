@@ -28,7 +28,7 @@ const routes = [
         name: 'index',
         component: () => import('./view/index'),
         meta: {
-            title: '邻家小铺'
+            title: '牛牛节点'
         }
     },
     {
@@ -43,7 +43,7 @@ const routes = [
         name: 'list',
         component: () => import('./view/goods/list'),
         meta: {
-            title: '邻家小铺'
+            title: '牛牛节点'
         }
     },
     {

@@ -31,6 +31,18 @@ export default {
       }
     })
   },
+
+  loginByTg:function(token, tgCode) {
+    return request({
+      url: '/user/loginByTg',
+      method: 'post',
+      params: {
+        "token": token,
+        "tgCode": tgCode
+      }
+    })
+  },
+
   sendSmsCode:function(mobile) {
     return request({
       url: '/sendSmsCode',
@@ -44,6 +56,12 @@ export default {
     return request({
       url: '/logout',
       method: 'post'
+    })
+  },
+  getBotLink:function(){
+    return request({
+      url: '/user/getBotLoginLink',
+      method: 'get'
     })
   }
 

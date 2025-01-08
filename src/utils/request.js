@@ -22,8 +22,6 @@ service.interceptors.request.use(
   },
   error => {
     // do something with request error
-    console.log(3333333)
-    console.log(JSON.stringify(error))
     return Promise.reject(error)
   }
 )
@@ -41,9 +39,7 @@ service.interceptors.response.use(
    * You can also judge the status by HTTP Status Code
    */
   response => {
-    console.log(1111111)
-
-    console.log('response',JSON.stringify(response))
+    console.log('response',response)
     if(response.headers.token){
       //如果后台通过header返回token，说明token已经更新，则更新客户端本地token
       store.dispatch('app/toggleToken',response.headers.token)
@@ -56,10 +52,7 @@ service.interceptors.response.use(
     }
   },
   error => {
-    console.log(22222222222)
-    // const code = error.response.data.status
-
-    console.log(error)
+    console.log('error',JSON.stringify(error))
     if (error.response) {
       switch (error.response.status) {
         case 401:
@@ -73,7 +66,7 @@ service.interceptors.response.use(
           return Promise.reject("登录信息失效，自动跳转登录...")
           break;
         case 500:
-          console.log('error',JSON.stringify(error.response.data.message))
+          console.log('error',error.response)
           if(error.response.data.message ) {
             if (error.response.data.message.indexOf('relogin') > -1) {
               console.log('need relogin')
@@ -95,7 +88,7 @@ service.interceptors.response.use(
 
               return Promise.reject(error.response.data.message)
             }else {
-              Toast.fail(error.response.data.message)
+              // Toast.fail(error.response.data.message)
               return Promise.reject(error.response.data.message)
             }
           }
@@ -103,15 +96,6 @@ service.interceptors.response.use(
         default:
           return Promise.reject(error.response.data.message)
       }
-    }else{
-      console.log(11111)
-      store.dispatch('app/toggleUser', {})
-      store.dispatch('app/toggleToken', '')
-      router.replace({
-        path: '/login',
-        query: {redirect: router.currentRoute.path}
-      })
-      return Promise.reject(error.response.data.message)
     }
   }
 )

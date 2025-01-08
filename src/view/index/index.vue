@@ -22,7 +22,7 @@
         <div style="width: 100%;background-color: white; position: absolute;top:140px; left: 0px;">
             <div  @click="viewGoodsDetail(goods.id)" v-for="(goods,index) in hotList" :key="index" style="display: flex; width: 94%; height: 108px;background-color: #F7F8FA;  border-radius: 10px; margin: 8px auto;">
                 <div style="height: 100%;width: 30%;  display: flex; justify-content: center;">
-                    <img style="height: 90px; width: 90px; margin: 5px auto; text-align: center;" src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/d3a36269683536a9d46a044392ed37ab.png"/>
+                    <img style="height: 90px; width: 90px; margin: 5px auto; text-align: center;" :src="goods.img"/>
                 </div>
                 <div style="height: 100%;width: 70%; padding-left: 10px; padding-top: 4px; position: relative;">
                     <p style="margin: 3px 0;padding-top: 2px; font-weight: 500; font-size: 15px; color: #323233;">{{ goods.name }}  </p>
