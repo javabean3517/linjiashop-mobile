@@ -30,6 +30,10 @@ export default {
                     this.isSuccess = false
                     this.result="支付失败"
                 }
+            }).catch(err=>{
+                this.isSuccess = false
+                this.result=err
+                    
             })
         },
         toIndex(){

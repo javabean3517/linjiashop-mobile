@@ -16,10 +16,16 @@ export default {
     data() {
         return {
             order: {},
-            payType: 'wxpay'
+            payType: 'wxpay',
+            ispc: false
         };
     },
     mounted() {
+        if(navigator.userAgent.indexOf("Windows")>-1){
+            this.ispc = true
+          }else{
+            this.ispc = false
+          }
         this.init()
     },
     computed: {},

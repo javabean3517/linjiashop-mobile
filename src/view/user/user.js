@@ -1,10 +1,11 @@
 import userApi from '@/api/user'
 import store from '@/store'
 
-import { Cell, CellGroup, Col, Icon, Row, Tabbar, TabbarItem, Toast, Dialog, Image } from 'vant';
+import { Cell, CellGroup, Col, Icon, Row, Tabbar, TabbarItem, Toast, Dialog, Image,Tag } from 'vant';
 
 export default {
     components: {
+        [Tag.name]: Tag,
         [Row.name]: Row,
         [Col.name]: Col,
         [Icon.name]: Icon,
@@ -27,6 +28,19 @@ export default {
         this.init()
     },
     methods: {
+        copyLink(){
+            navigator.clipboard.writeText(this.user.link).then(() => {
+                Toast('复制成功')
+                // alert('辅助成功');
+              }).catch(err => {
+                Toast('复制失败'+err)
+              });
+        
+        
+        },
+        importLink(){
+            window.open(this.user.importLink)
+        },
         init() {
 
             userApi.getUserInfo().then(response => {

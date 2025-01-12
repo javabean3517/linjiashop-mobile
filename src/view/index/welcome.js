@@ -21,11 +21,16 @@ import {
     Divider,
     Panel,
     Image,
-    List
+    List,
+    Tag ,
+    Sidebar,
+    SidebarItem 
 } from 'vant';
 
 export default {
     components: {
+        [Sidebar.name]: Sidebar,
+        [SidebarItem.name]: SidebarItem,
         [Row.name]: Row,
         [Col.name]: Col,
         [Icon.name]: Icon,
@@ -41,12 +46,14 @@ export default {
         [List.name]: List,
         [Panel.name]: Panel,
         [Image.name]: Image,
+        [Tag.name]: Tag,
         Lazyload
 
 
     },
     data() {
         return {
+            ispc: false,
             loading: false,
             finished: false,
             navList: [],
@@ -67,94 +74,58 @@ export default {
         }
     },
     mounted() {
+        let activeNav = sessionStorage.getItem('activeNav')
+        if(activeNav && activeNav.length>0){
+            this.activeNav = activeNav
+        }
         this.init()
+        if(navigator.userAgent.indexOf("Windows")>-1){
+            this.ispc = true
+          }else{
+            this.ispc = false
+          }
 
     },
     methods: {
         init() {
-            //首页暂不自动获取微信信息
-            // const user = storage.getUser()
-            // this.isLogin = user.nickName
-            // if(!this.isLogin) {
-            //     const url = window.location.href
-            //     if (url.indexOf('localhost') > -1 || url.indexOf('127.0.0.1') > -1) {
-            //         console.log('开发环境不获取openid')
-            //     } else {
-            //         const userAgent = window.navigator.userAgent.toLowerCase()
-            //         //使用微信访问本系统的时候获取微信openid，否则不获取
-            //         if (userAgent.indexOf('micromessenger') > -1) {
-            //             this.processOpenid()
-            //         }
-            //     }
-            // }
-            let categoryData = store.state.app.category
-            if (!categoryData || categoryData.length == 0) {
-                let platform = navigator.platform
-                store.dispatch('app/toggleDevice', platform)
-                categoryApi.getAllCategories().then(response => {
-                    console.log('content:'+JSON.stringify(response))
-                    let navList = response.content
-                    this.navList = navList
-                    store.dispatch('app/toggleCategory', navList)
-
-                }).catch((err) => {
-                    Toast.fail(err);
-                })
-            } else {
-                this.navList = categoryData
-            }
+            this.queryCates()
             this.queryGoods()
-            this.queryTopic()
-
         },
-        decimalPoint(val) {
-            console.log('val:'+val)
-            val = val.toString()
-            const splitPrice = val.split('.')
-            const numb1 = splitPrice[0]
-            var numb2 = '00'
-            if (splitPrice.length > 1) {
-              numb2 = splitPrice[1]
+        queryCates(){
+            let navList = sessionStorage.getItem('navList')
+            if(navList && navList.length>0){
+                
+                this.navList = JSON.parse(navList)
+                return
             }
-            return '<span style="font-size:14px;line-height:14px">￥</span>' + numb1+'.<span style="font-size:14px;line-height:14px">'+ numb2+'</span>'
+            categoryApi.getAllCategories().then(response => {
+                this.navList = response.content
+                sessionStorage.setItem('navList',JSON.stringify(response.content))
+            }).catch((err) => {
+                Toast.fail(err);
+            })
         },
+
         queryGoods() {
+            let key = 'hotList-'+this.activeNav
+            let hotList = sessionStorage.getItem(key)
+            if(hotList && hotList.length>0){
+                this.hotList = JSON.parse(hotList)
+                return
+            }
             goodsApi.search(this.activeNav).then(response => {
                 let list = response.content
-                // for (const index in  list) {
-                //     const item = list[index]
-                //     item.img = baseApi+'/file/getImgStream?idFile=' + item.pic
-                // }
                 this.hotList = list
+                sessionStorage.setItem(key ,JSON.stringify(this.hotList))
 
             }).catch((err) => {
                 Toast(err)
             })
-            // goodsApi.searchNew().then(response => {
-            //     let list = response.data
-            //     for (const index in  list) {
-            //         const item = list[index]
-            //         item.img = baseApi+'/file/getImgStream?idFile=' + item.pic
-            //     }
-            //     this.newList = list
 
-            // }).catch((err) => {
-            //     Toast(err)
-            // })
-        },
-        queryTopic(){
-            topicApi.queryAll().then(response => {
-                let list = response.content
-                for (const index in  list) {
-                    // const item = list[index]
-                    // item.img = baseApi+'/file/getImgStream?idFile=' + item.article.img
-                }
-                this.topicList = list
-                console.log('topicList',this.topicList)
-            })
         },
         clickNav(index, title) {
             this.activeNav = index;
+            sessionStorage.setItem('activeNav',index)
             this.queryGoods()
             // this.$router.push({path: '/list?itemId='+index})
 

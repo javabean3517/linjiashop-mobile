@@ -1,7 +1,7 @@
 import loginApi from '@/api/login'
 import store from '@/store'
 import storage  from '@/utils/storage'
-import { Row, Col, Icon, Cell, CellGroup,Field,Button,Toast,
+import {Loading, Row, Col, Icon, Cell, CellGroup,Field,Button,Toast,
     Tabbar,Tag,Tab, Tabs,Form,
     TabbarItem,Dialog,Collapse, CollapseItem} from 'vant';
 
@@ -27,8 +27,8 @@ export default {
     },
     data() {
         return {
-            tgCodeDisabled: false,
-            tgLoginDisabled: true,
+            uuid:'',
+            showLoading: false,
             token:'',
             mobile:'',
             smsCode:'',
@@ -42,13 +42,115 @@ export default {
             activeName : -1,
             active: 0,
             link:'',
-            tgCode:''
+            tgLink:'',
+            tgCode:'',
+            modeType:'l',
+            modeName : '账号登录',
+            tips:'没有账号？',
+            buttonName:'登  录',
+            account:'',
+            pwd:'',
+            base64:'222',
+            imageCode:'',
+            pwd2:''
+
         }
     },
     mounted(){
       this.init()
     },
     methods:{
+        logOrReg(){
+            if(this.imageCode === ''){
+                Toast({duration:1000,message:'请输入图形验证码'})
+                return
+            }
+            this.showLoading = true
+
+            if(this.modeType=='l'){
+                loginApi.loginByPass(this.account,this.pwd,this.uuid,this.imageCode).then(response=>{
+                    store.dispatch('app/toggleToken',response.content.token)
+                    store.dispatch('app/toggleUser',response.content)
+                    this.resetForLogin()
+                    if(this.redirect){
+                        this.$router.push({path: this.redirect})
+                    }else {
+                        this.$router.push({path: '/index'})
+                    }
+                    this.showLoading = false
+                }).catch(err=>{
+                    this.showLoading = false
+                    this.getCaptcha()
+                    Toast(err)
+                })
+            }
+
+            if(this.modeType=='r'){
+                if(this.pwd2!=this.pwd){
+                    Toast('两次输入密码不一致！')
+                    return
+                }
+                loginApi.register(this.account,this.pwd,this.uuid,this.imageCode).then(response=>{
+                    store.dispatch('app/toggleToken',response.content.token)
+                    store.dispatch('app/toggleUser',response.content)
+                    this.resetForLogin()
+                    if(this.redirect && this.redirect.indexOf('login')<0){
+                        this.$router.push({path: this.redirect})
+                    }else {
+                        this.$router.push({path: '/index'})
+                    }
+                    this.showLoading = false
+                }).catch(err=>{
+                    this.showLoading = false
+                    this.getCaptcha()
+                    Toast(err)
+                })
+            }
+
+        },
+        changeMode(){
+            this.account=''
+            this.imageCode=''
+            this.pwd=''
+             this.pwd2=''
+            if(this.modeType=='r'){
+                this.modeName = '账号登录'
+                this.modeType = 'l'
+                this.tips = '没有账号？'
+                this.buttonName = '登  录'
+                return
+            }
+            if(this.modeType=='l'){
+                this.modeName = '账号注册'
+                this.modeType = 'r'
+                this.tips = '<<<返回登录'
+                this.buttonName = '注册并登录'
+                return
+            }
+        },
+        onClickTab({ title }){
+            this.getCaptcha()
+            this.getTgLink()
+            
+            this.imageCode = ''
+            this.link = ''
+            this.tgCode = ''
+            this.account = ''
+            this.pwd = ''
+            this.pwd2=''
+            this.modeType = 'l'
+            this.tips = '没有账号？'
+            this.buttonName = '登  录'
+
+            return true
+        },
+        getCaptcha(){
+            loginApi.getCaptcha().then(res=>{
+                this.imageCode = ''
+                this.uuid = res.content.uuid
+                this.base64 = res.content.base64
+            })
+        },
         init(){
             if(store.state.app.user.nickName){
                 this.$router.push({path: '/index'})
@@ -57,6 +159,8 @@ export default {
             if(this.$route.query.redirect){
                 this.redirect = this.$route.query.redirect
             }
+            this.getCaptcha()
+            this.getTgLink()
         },
         onSubmit(){
 
@@ -65,50 +169,35 @@ export default {
             this.show1 = false;
             this.show2 = true;
         },
-        toTg(){
+        getTgLink(){
             loginApi.getBotLink().then(res=>{
                 console.log(res.content.token)
                 this.token = res.content.token
-                // window.location.replace()(res.content.link+res.content.token,'_blank')
-
-                setTimeout(() => {
-                    var adPopup = window.open('about:blank', '_blank', 'width=' + window.screen.width + ', height=' + window.screen.height)
-                    adPopup.location = res.content.link+res.content.token;
-                }, 500)
+                this.tgLink = res.content.link+res.content.token
+            }).catch(err=>{
+                Toast(err)
             })
+        },
+        toTg(){
+            this.showLoading = true
+            window.open(this.tgLink, '_blank');
+            this.showLoading = false
            
         },
+        
         loginByTg(){
             console.log(this.tgCode)
             console.log(this.token)
-
+            this.showLoading = true
             if(this.tgCode === ''){
-                Toast({duration:1000,message:'请输入验证码'})
+                Toast({duration:1000,message:'请输入TG验证码'})
                 return
             }
-            if(this.token === ''){
-                Toast({duration:1000,message:'请获取验证码'})
+            if(this.imageCode === ''){
+                Toast({duration:1000,message:'请输入图形验证码'})
                 return
             }
-            loginApi.loginByTg(this.token,this.tgCode).then(response=>{
-                console.log("response:"+JSON.stringify(response))
-                console.log("content:"+JSON.stringify(response.content))
-
-                store.dispatch('app/toggleToken',response.content.token)
-                store.dispatch('app/toggleUser',response.content)
-                console.log("token:"+response.content.token)
-                this.$router.push({path: '/index'})
-                // if(this.redirect){
-                //     this.$router.push({path: this.redirect})
-                // }else {
-                //     this.$router.push({path: '/index'})
-                // }
-            }).catch( (err) => {
-
-            })
-        },
-        loginByLink(){
-            loginApi.loginByLink(this.link).then( response=> {
+            loginApi.loginByTg(this.token,this.tgCode,this.uuid,this.imageCode).then(response=>{
                 store.dispatch('app/toggleToken',response.content.token)
                 store.dispatch('app/toggleUser',response.content)
                 this.resetForLogin()
@@ -117,53 +206,47 @@ export default {
                 }else {
                     this.$router.push({path: '/index'})
                 }
+                this.showLoading = false
             }).catch( (err) => {
-                console.log(233333)
-                this.$dialog.showToast(err)
+                Toast({duration:1000,message:err})
+                this.getCaptcha()
+                this.showLoading = false
+            })
+        },
+        loginByLink(){
+            if(this.imageCode === ''){
+                Toast({duration:1000,message:'请输入图形验证码'})
+                return
+            }
+            this.showLoading = true
+            loginApi.loginByLink(this.link,this.uuid,this.imageCode).then( response=> {
+                store.dispatch('app/toggleToken',response.content.token)
+                store.dispatch('app/toggleUser',response.content)
+                this.resetForLogin()
+                this.showLoading = false
+                if(this.redirect){
+                    this.$router.push({path: this.redirect})
+                }else {
+                    this.$router.push({path: '/index'})
+                }
+            }).catch( (err) => {
+                this.showLoading = false
+                this.getCaptcha()
+                Toast({duration:1000,message:err})
             })
         },
         toRegister(){
             this.show2 = false;
             this.show1 = true;
         },
+
         resetForLogin(){
             //登录成功后初始化数据状态
             //清空缓存中的地址信息
             storage.set('chosenAddressId','')
         },
-        loginOrRegister(){
-            loginApi.loginOrReg(this.mobile,this.smsCode).then( response=> {
-                console.log(232432432423)
-                store.dispatch('app/toggleToken',response.content.token)
-                store.dispatch('app/toggleUser',response.content)
-                if(response.data.initPassword){
-                    Toast({duration:8000,message:'欢迎新用户，请谨慎保管您的初始密码：'+response.data.initPassword})
-                }
-                this.resetForLogin()
-                if(this.redirect){
-                    this.$router.push({path: this.redirect})
-                }else {
-                    this.$router.push({path: '/index'})
-                }
-            }).then( (err) => {
-                // Toast.fail(err)
-            })
-        },
-        loginByPass(){
-            loginApi.loginByPassword(this.mobile,this.password).then( response=> {
-                store.dispatch('app/toggleToken',response.content.token)
-                store.dispatch('app/toggleUser',response.content)
-                this.resetForLogin()
-                if(this.redirect){
-                   this.$router.push({path: this.redirect})
-                }else {
-                   this.$router.push({path: '/index'})
-                }
-            }).catch( err=>{
-                console.log("err:"+err)
-                Toast(err)
-            })
-        },
+
+
         sendSms(){
             this.hasSendSms = true
             loginApi.sendSmsCode(this.mobile).then( response => {

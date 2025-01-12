@@ -26,5 +26,6 @@ export default {
   get:function(key){
     return localStorage.getItem(COOKIE_KEY_PRE+key)
   }
+  
 
 }

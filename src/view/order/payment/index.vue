@@ -10,18 +10,19 @@
 
         <van-radio-group v-model="payType">
             <van-cell-group>
-                <van-cell clickable @click="radio = 'wxpay'">
+                <van-cell clickable @click="radio = 'alipay'">
+                    <img style="height:32px;width:32px;" slot="icon" slot-scope="props"
+                        src="../../../assets/img/支付宝.png">
+                    <span style=" line-height: 32px; margin-left: 15px;">支付宝+微信</span>
+                    <van-radio slot="right-icon" name="alipay" style="padding-left:55%;" />
+                </van-cell>
+                <!-- <van-cell clickable @click="radio = 'wxpay'">
                     <img style="height:32px;width:32px;" slot="icon" slot-scope="props"
                         src="../../../assets/img/支付-微信支付.png"><span
                         style=" line-height: 32px; margin-left: 15px;">微信支付</span>
                     <van-radio slot="right-icon" name="wxpay" style="padding-left:55%;" />
-                </van-cell>
-                <van-cell clickable @click="radio = 'alipay'">
-                    <img style="height:32px;width:32px;" slot="icon" slot-scope="props"
-                        src="../../../assets/img/支付宝.png">
-                    <span style=" line-height: 32px; margin-left: 15px;">支付宝</span>
-                    <van-radio slot="right-icon" name="alipay" style="padding-left:55%;" />
-                </van-cell>
+                </van-cell> -->
+
 
                 <van-cell clickable @click="radio = 'usdt'">
                     <img style="height:32px;width:32px;" slot="icon" slot-scope="props"
@@ -31,7 +32,7 @@
                 </van-cell>
             </van-cell-group>
         </van-radio-group>
-        <van-button class="footer" type="primary" size="large" @click="pay">立即支付</van-button>
+        <van-button class="footer"  v-bind:class="{ 'pc3': ispc }" type="primary" size="large" @click="pay">立即支付</van-button>
     </div>
 </template>
 
@@ -49,7 +50,10 @@
 .van-cell-group {
     margin-top: 10px;
 }
-
+.pc3{
+    width: 25%;
+    left: 37.5%;
+}
 .footer {
     position: fixed;
     bottom: 0px;

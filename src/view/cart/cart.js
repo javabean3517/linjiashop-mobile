@@ -19,6 +19,7 @@ export default {
 
     data() {
         return {
+            ispc : false,
             totalPrice: 2600,
             isLogin:false,
             activeFooter: 2,
@@ -32,6 +33,11 @@ export default {
         }
     },
     mounted(){
+        if(navigator.userAgent.indexOf("Windows")>-1){
+            this.ispc = true
+          }else{
+            this.ispc = false
+          }
       this.init()
     },
     computed: {

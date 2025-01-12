@@ -28,7 +28,7 @@ const routes = [
         name: 'index',
         component: () => import('./view/index'),
         meta: {
-            title: '牛牛节点'
+            title: '牛牛节点',keepAlive:true
         }
     },
     {

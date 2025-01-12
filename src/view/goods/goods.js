@@ -45,6 +45,8 @@ export default {
 
   data() {
     return {
+      ispc : false,
+      showLoading: true,
       goodsName :'',
       ifLike: false,
       likeColor: 'black',
@@ -62,6 +64,12 @@ export default {
     };
   },
   created() {
+    if(navigator.userAgent.indexOf("Windows")>-1){
+      this.ispc = true
+    }else{
+      this.ispc = false
+    }
+
     this.init()
   },
   computed: {
@@ -76,6 +84,7 @@ export default {
         this.goods = goods
         this.goodsName = goods.name
         this.sku = goods.sku
+        this.showLoading = false
 
         // const user = storage.getUser()
         // if(user.nickName) {
@@ -96,6 +105,7 @@ export default {
         //     })
         // }
       }).catch((err) => {
+        this.showLoading = false
         console.log('err', err)
         Toast(err)
       })
