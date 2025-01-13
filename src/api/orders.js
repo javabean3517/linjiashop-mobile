@@ -39,7 +39,7 @@ export default {
      */
     getOrders: function (params) {
         return request({
-            url: '/user/order/getOrders',
+            url: '/order/orders',
             method: 'get',
             params
         })

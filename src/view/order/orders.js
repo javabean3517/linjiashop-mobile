@@ -26,8 +26,6 @@ export default {
             navList: [
                 {name:'全部',id:0},
                 {name:'待付款',id:1},
-                {name:'待发货',id:2},
-                {name:'已发货',id:3},
                 {name:'已完成',id:4},
             ],
             orderList:[],
@@ -68,15 +66,16 @@ export default {
         },
         getData(){
             order.getOrders(this.listQuery).then( response => {
-                let orderList = response.data.records
-                for(let index in  orderList){
-                    let orders = orderList[index]
-                    orders.title=''+orders.createTime
-                    orders.descript = ''+orders.orderSn
-                }
-                this.orderList = orderList
-                this.loading = false
-                this.finished= (response.data.total === 0 || (response.data.current === response.data.pages))
+                this.orderList = response.content
+                // console.log('orderList:'+orderList)
+                // for(let index in  orderList){
+                //     let orders = orderList[index]
+                //     orders.title=''+orders.createTime
+                //     orders.descript = ''+orders.orderSn
+                // }
+                // this.orderList = orderList
+                // this.loading = false
+                // this.finished= (response.data.total === 0 || (response.data.current === response.data.pages))
             }).catch( (err) => {
 
             })

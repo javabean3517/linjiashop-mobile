@@ -119,7 +119,7 @@
     <!-- 操作面板 -->
     <van-cell-group class="action-card">
       <van-cell icon="exchange" title="我的订阅" value="点击复制" @click="copyLink" />
-      <van-cell icon="orders-o" title="我的订单" is-link @click="logout" />
+      <van-cell icon="orders-o" title="我的订单" is-link to="order" @click="logout" />
 
       <div style="width: 100%; height: 8px; background-color: rgb(245, 245, 245)"></div>
       <van-cell icon="points" title="可用设备" value="3台" />
