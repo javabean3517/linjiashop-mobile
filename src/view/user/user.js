@@ -21,13 +21,20 @@ export default {
     data() {
         return {
             activeFooter: 3,
-            user: {}
+            user: {},
+            message: '测试内容'
         }
     },
     mounted() {
         this.init()
     },
     methods: {
+        onCopy: function (e) {
+            Toast('复制成功，请使用clash/小火箭手动导入订阅')
+          },
+          onError: function (e) {
+            Toast('复制失败')
+          },
         copyLink(){
             navigator.clipboard.writeText(this.user.link).then(() => {
                 Toast('复制成功')
@@ -46,6 +53,7 @@ export default {
             userApi.getUserInfo().then(response => {
                 const url = window.location.href
                 this.user = response.content
+                this.message = this.user.link
                 console.log(JSON.stringify(this.user))
                 store.dispatch('app/toggleUser', response.content)
                 // if(response.data.refreshWechatInfo === false){

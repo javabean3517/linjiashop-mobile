@@ -1,17 +1,17 @@
-<template>
+wrapper<template>
 
-    <div class="goods" v-if="!offline">
+    <div class="goods" v-if="ku == undefined || sku == '' || sku == null || sku.length == 0">
         <van-overlay :show="showLoading" @click="showLoading = false" z-index="1000">
             <div class="wrapper" @click.stop style=" margin: 300px auto; ">
                 <van-loading text-color="#32AE57" color="#32AE57" vertical>加载中</van-loading>
             </div>
         </van-overlay>
-        <van-nav-bar :title="goodsName" left-text="返回" left-arrow @click-left="onClickLeft"
-            style="position: fixed;" v-bind:class="{ 'pc4': ispc }" />
+        <van-nav-bar :title="goodsName" left-text="返回" left-arrow @click-left="onClickLeft" style="position: fixed;"
+            v-bind:class="{ 'pc4': ispc }" />
         <div style="position: relative; width: 100%; top: 30px;">
-            <van-swipe class="goods-swipe" :autoplay="3000" style="width: 100%;height: 350px;">
+            <van-swipe class="goods-swipe" :autoplay="3000" style="width: 100%;height: 300px;">
                 <van-swipe-item>
-                    <img :src="goods.img" style="height: 350px;">
+                    <img :src="goods.img" style="height: 300px;">
                 </van-swipe-item>
             </van-swipe>
 
@@ -32,8 +32,38 @@
                     <van-col span="30">节点：港、新、日、韩、美、菲、澳、俄等20+节点</van-col>
                 </van-cell>
                 <p class="goods-detail">本产品支持24小时退货，如使用遇到问题请联系管理员</p>
+                <table ref="table" class="table">
+                    <!-- 表头 -->
+                    <tr class="top">
+                        <th v-for="(item_th, index_th) in thList" :key="index_th"
+                            :style="{ background: item_th.backgroundColor }">
+                            <span class="title">{{ item_th.title }}</span>
+                            <span class="sort" v-if="item_th.isSort" @click="needSort(item_th.sortField, index_th)"
+                                :class="[sortIndex === index_th && isNeedSort ? 'sortUp' : '']"></span>
+                        </th>
+                    </tr>
+                    <!-- 第一行的合计数据 需要高亮 -->
+                    <tr class="cont sum" v-for="(item, index) in totalData" :key="index + Math.random() * 24">
+                        <td>{{ item.comname2 }}</td>
+                        <td>{{ item.addAgent }}</td>
+                        <td>{{ item.addAgentRate }}</td>
+                        <td>{{ item.preium }}</td>
+                        <td>{{ item.premiumRate }}</td>
+                    </tr>
+
+                    <!--展示列表数据 -->
+                    <tr class="cont" v-for="(item_tr, index_tr) in data11" :key="index_tr">
+                        <td>{{ item_tr.comname2 }}</td>
+                        <td>{{ item_tr.addAgent }}</td>
+                        <td>{{ item_tr.addAgentRate }}</td>
+                        <td>{{ item_tr.preium }}</td>
+                        <td>{{ item_tr.premiumRate }}</td>
+                    </tr>
+                </table>
+
+
             </van-cell-group>
-            <van-goods-action   v-bind:class="{ 'pc1': ispc }">
+            <van-goods-action v-bind:class="{ 'pc1': ispc }">
                 <van-goods-action-icon icon="home-o" @click="toHome" text="主页" />
                 <van-goods-action-icon icon="like-o" @click="like" :color="likeColor" text="喜欢" />
                 <van-goods-action-icon icon="cart-o" @click="goToCart" :info="cartCount" text="购物车" />
@@ -41,8 +71,8 @@
             </van-goods-action>
         </div>
 
-        <van-sku  v-bind:class="{ 'pc3': ispc }" v-model="showSku" :sku="sku" :goods="goods" :goods-id="goods.id" :hide-stock="sku.hide_stock"
-            @buy-clicked="onBuyClicked" @add-cart="onAddCartClicked" />
+        <van-sku v-bind:class="{ 'pc3': ispc }" v-model="showSku" :sku="sku" :goods="goods" :goods-id="goods.id"
+            :hide-stock="sku.hide_stock" @buy-clicked="onBuyClicked" @add-cart="onAddCartClicked" />
     </div>
 
     <div class="offline" v-else>
@@ -81,12 +111,12 @@ img {
     color: black;
 }
 
-.pc3{
+.pc3 {
     width: 25%;
     left: 37.5%;
 }
 
-.pc4{
+.pc4 {
     width: 25%;
     left: 37.5%;
 }

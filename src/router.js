@@ -166,6 +166,14 @@ const routes = [
         }
     },
     {
+        name: 'usdt',
+        component: () => import('./view/order/usdt'),
+        meta: {
+            requireAuth: true,
+            title: '收银台'
+        }
+    },
+    {
         name: 'address',
         component: () => import('./view/address'),
         meta: {

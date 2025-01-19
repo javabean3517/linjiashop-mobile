@@ -79,7 +79,13 @@ export default {
     init() {
       let id = this.$route.params.id
       goods.getGoods(id).then(response => {
+
         let goods = response.content
+        if(goods.sku==undefined){
+          Toast.fail('该商品已下架')
+          this.$router.go(-1)
+          return
+        }
         this.offline = false
         this.goods = goods
         this.goodsName = goods.name
@@ -123,6 +129,7 @@ export default {
     },
     addCart() {
       this.showSku = true
+      
     },
     onClickLeft() {
       this.$router.go(-1);

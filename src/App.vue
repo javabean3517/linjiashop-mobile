@@ -3,7 +3,7 @@
     <div v-bind:class="{ 'pc1': ispc }">
             <router-view/>
             <div style="position: absolute; z-index: -100;left: 0;bottom: 0;">
-              <van-tabbar v-model="activeFooter" active-color="#32AE57" v-bind:class="{ 'pc2': ispc }">
+              <van-tabbar z-index=999999 style="z-index: 9999900" v-model="activeFooter" active-color="#32AE57" v-bind:class="{ 'pc2': ispc }">
                   <van-tabbar-item icon="home-o"  to="/index">首页</van-tabbar-item>
                   <van-tabbar-item icon="question-o"  to="/教程">教程</van-tabbar-item>
                   <van-tabbar-item icon="cart-o"  to="/cart">购物车</van-tabbar-item>

@@ -20,6 +20,19 @@ export default {
             url: '/pay/queryResult/' + orderSn,
             method: 'get'
         })
-    }
+    },
+    usdtPay:function(orderSn){
+        return request({
+            url: '/usdt/pay/' + orderSn,
+            method: 'get'
+        })
+    },
+
+    balancePay:function(orderSn){
+        return request({
+            url: '/balance/' + orderSn,
+            method: 'get'
+        })
+    },
 }
 

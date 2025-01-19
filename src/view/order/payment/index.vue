@@ -4,7 +4,7 @@
         <van-cell-group>
             <van-cell title="订单编号" :value="order.orderSn" />
             <van-cell title="应付金额">
-                <span class="red strong">￥{{ formatPrice(order.totalPrice) }}</span>
+                <span class="red strong">￥{{order.totalPrice}}</span>
             </van-cell>
         </van-cell-group>
 
@@ -13,15 +13,15 @@
                 <van-cell clickable @click="radio = 'alipay'">
                     <img style="height:32px;width:32px;" slot="icon" slot-scope="props"
                         src="../../../assets/img/支付宝.png">
-                    <span style=" line-height: 32px; margin-left: 15px;">支付宝+微信</span>
-                    <van-radio slot="right-icon" name="alipay" style="padding-left:55%;" />
+                    <span style=" line-height: 32px; margin-left: 15px;">支付宝</span>
+                    <van-radio slot="right-icon" name="alipay" style="padding-left:55%;" ></van-radio>
                 </van-cell>
-                <!-- <van-cell clickable @click="radio = 'wxpay'">
+                <van-cell clickable @click="radio = 'wxpay'">
                     <img style="height:32px;width:32px;" slot="icon" slot-scope="props"
                         src="../../../assets/img/支付-微信支付.png"><span
                         style=" line-height: 32px; margin-left: 15px;">微信支付</span>
                     <van-radio slot="right-icon" name="wxpay" style="padding-left:55%;" />
-                </van-cell> -->
+                </van-cell>
 
 
                 <van-cell clickable @click="radio = 'usdt'">
@@ -29,6 +29,12 @@
                         src="../../../assets/img/USDT.png">
                     <span style=" line-height: 32px; margin-left: 15px;">TRC20-USDT</span>
                     <van-radio slot="right-icon" name="usdt" style="padding-left:55%;" />
+                </van-cell>
+                <van-cell clickable @click="radio = 'balance'">
+                    <img style="height:32px;width:32px;" slot="icon" slot-scope="props"
+                        src="../../../assets/img/余额支付.png">
+                    <span style=" line-height: 32px; margin-left: 15px;">余额支付（余额￥{{user.money}}）</span>
+                    <van-radio :disabled="user.money<order.totalPrice" slot="right-icon" name="balance"  style="padding-left:35%;" />
                 </van-cell>
             </van-cell-group>
         </van-radio-group>

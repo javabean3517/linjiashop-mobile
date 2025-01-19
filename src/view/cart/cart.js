@@ -30,6 +30,9 @@ export default {
             showEdit: false,
             rightText:'编辑',
             totalPrice:0,
+            activedUser:{},
+            currentUser:{},
+            activedType:''
         }
     },
     mounted(){
@@ -67,17 +70,17 @@ export default {
             if(this.isLogin) {
                 const that = this
                 cartApi.queryByUser().then(response => {
-                    let cartList = response.content
+                    let cartList = response.content.vos
                     for (const index in cartList) {
                         this.checkedCartItem.push(cartList[index].id )
                     }
                     that.totalPrice = Number(cartList[0].price.split(".")[0])
                     console.log('index:'+that.totalPrice )
-
-
-                    // this.allCartItem = this.checkedCartItem
                     this.cartList = cartList
                     console.log('cartList:'+JSON.stringify(this.cartList))
+                    this.activedUser = response.content.activedUser
+                    this.currentUser = response.content.currentUser
+                    this.activedType = response.content.activedType
                 }).catch((err) => {
                     console.log(err)
                 })
