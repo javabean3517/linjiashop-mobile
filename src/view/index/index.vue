@@ -7,13 +7,6 @@
                     <img style=" height: 100px;" v-bind:class="{ 'pc1': ispc, 'mobile1': !ispc }" src="../../assets/img/logo.png">
 
                 </div>
-                <!-- <div style="width: 35%;height: 50px;background-color: white;" >
-                    <img style="width: 100%;height: 60px;" src="../../assets/img/logo.png" alt="">
-                </div> -->
-                <!-- <van-tabs sticky color="#32AE57" v-model="activeNav" @click="clickNav" style="width: 100%;">
-                    <van-tab v-for="nav in navList" :title="nav.name" v-bind:key="nav.id" :name="nav.id">
-                    </van-tab>
-                </van-tabs> -->
             </div>
 
         </div>

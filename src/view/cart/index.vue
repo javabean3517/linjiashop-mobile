@@ -8,8 +8,8 @@
         </van-card>
       </div>
     </van-checkbox-group>
-    <div style="font-size: 20px; margin: 20px auto; width: 100%; text-align: center;">套餐明细</div>
-    <div style="margin-top: 20px;">
+    <div v-if="cartList.length > 0" style="font-size: 20px; margin: 20px auto; width: 100%; text-align: center;">套餐明细</div>
+    <div style="margin-top: 20px;" v-if="cartList.length > 0">
       <table ref="table" class="table">
         <!-- 表头 -->
         <tr class="top">
@@ -54,36 +54,9 @@
           <td>{{activedUser.classExpiredStr}}</td>
         </tr>
         <tr class="cont" >
-          <td>下期流量重置</td>
+          <td>流量重置</td>
           <td>{{currentUser.nextResetStr}}</td>
           <td>{{activedUser.nextResetStr}}</td>
-        </tr>
-      </table>
-      <table ref="table" class="table">
-        <!-- 表头 -->
-        <tr class="top">
-          <th v-for="(item_th, index_th) in thList" :key="index_th" :style="{ background: item_th.backgroundColor }">
-            <span class="title">{{ item_th.title }}</span>
-            <span class="sort" v-if="item_th.isSort" @click="needSort(item_th.sortField, index_th)"
-              :class="[sortIndex === index_th && isNeedSort ? 'sortUp' : '']"></span>
-          </th>
-        </tr>
-        <!-- 第一行的合计数据 需要高亮 -->
-        <tr class="cont sum" v-for="(item, index) in totalData" :key="index + Math.random() * 24">
-          <td>{{ item.comname2 }}</td>
-          <td>{{ item.addAgent }}</td>
-          <td>{{ item.addAgentRate }}</td>
-          <td>{{ item.preium }}</td>
-          <td>{{ item.premiumRate }}</td>
-        </tr>
-
-        <!--展示列表数据 -->
-        <tr class="cont" v-for="(item_tr, index_tr) in data11" :key="index_tr">
-          <td>{{ item_tr.comname2 }}</td>
-          <td>{{ item_tr.addAgent }}</td>
-          <td>{{ item_tr.addAgentRate }}</td>
-          <td>{{ item_tr.preium }}</td>
-          <td>{{ item_tr.premiumRate }}</td>
         </tr>
       </table>
     </div>

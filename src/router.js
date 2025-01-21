@@ -40,13 +40,6 @@ const routes = [
         }
     },
     {
-        name: 'list',
-        component: () => import('./view/goods/list'),
-        meta: {
-            title: '牛牛节点'
-        }
-    },
-    {
         path: '/goods/:id',
         name: 'goods',
         component: () => import('./view/goods'),
@@ -54,13 +47,7 @@ const routes = [
             title: '商品详情'
         }
     },
-    {
-        name: 'search',
-        component: () => import('./view/search'),
-        meta: {
-            title: '发现'
-        }
-    },
+    
     {
         name: 'user',
         component: () => import('./view/user'),
@@ -70,45 +57,16 @@ const routes = [
         }
     },
     {
-        name: 'setting',
-        component: () => import('./view/setting'),
+        name: 'doc',
+        component: () => import('./view/doc'),
         meta: {
             requireAuth: true,
-            title: '设置'
+            title:'教程'
         }
     },
-    {
-        name: 'updateUserName',
-        component: () => import('./view/setting/updateUserName'),
-        meta: {
-            requireAuth: true,
-            title: '修改姓名'
-        }
-    },
-    {
-        name: 'updateMobile',
-        component: () => import('./view/setting/updateMobile'),
-        meta: {
-            requireAuth: true,
-            title: '修改手机号'
-        }
-    },
-    {
-        name: 'updatePwd',
-        component: () => import('./view/setting/updatePwd'),
-        meta: {
-            requireAuth: true,
-            title: '修改密码'
-        }
-    },
-    {
-        name: 'avatar',
-        component: () => import('./view/setting/avatar'),
-        meta: {
-            requireAuth: true,
-            title: '修改头像'
-        }
-    },
+
+
+
     {
         name: 'order',
         component: () => import('./view/order'),
@@ -133,14 +91,7 @@ const routes = [
             title: '物流信息'
         }
     },
-    {
-        name: 'favorite',
-        component: () => import('./view/favorite'),
-        meta: {
-            requireAuth: true,
-            title: '喜欢的商品'
-        }
-    },
+
     {
         name: 'payment/callback/:orderSn',
         component: () => import('./view/order/payment/callback'),
@@ -173,20 +124,8 @@ const routes = [
             title: '收银台'
         }
     },
-    {
-        name: 'address',
-        component: () => import('./view/address'),
-        meta: {
-            title: '收货地址'
-        }
-    },
-    {
-        name: 'address/edit',
-        component: () => import('./view/address/edit'),
-        meta: {
-            title: '新增收货地址'
-        }
-    },
+
+
     {
         name: 'cart',
         component: () => import('./view/cart'),

@@ -96,20 +96,20 @@
       <van-cell icon="gold-coin-o" title="我的订单" value="查看全部订单" is-link @click="logout"/>
     </van-cell-group> -->
     <div class="user-data">
-      
-        <div class="user-data-item"  @click="importLink">
-          <!-- <a href="https://www.baidu.com"> -->
-            <img style="width: 32px;height: 32px;" src="../../assets/img/ios.png" alt="">
 
-            <span style="margin-top: 8px;">IOS导入</span>
-          <!-- </a> -->
-        </div>
-      
-      <div class="user-data-item"  @click="importLink">
+      <div class="user-data-item" @click="importLink">
+        <!-- <a href="https://www.baidu.com"> -->
+        <img style="width: 32px;height: 32px;" src="../../assets/img/ios.png" alt="">
+
+        <span style="margin-top: 8px;">IOS导入</span>
+        <!-- </a> -->
+      </div>
+
+      <div class="user-data-item" @click="importLink">
         <img style="width: 32px;height: 32px;" src="../../assets/img/android.png" alt="">
         <span style="margin-top: 8px;">安卓导入</span>
       </div>
-      <div class="user-data-item"  @click="importLink">
+      <div class="user-data-item" @click="importLink">
         <img style="width: 32px;height: 32px;" src="../../assets/img/windows.png" alt="">
 
         <span style="margin-top: 8px;">windows导入</span>
@@ -118,12 +118,8 @@
 
     <!-- 操作面板 -->
     <van-cell-group class="action-card">
-      <van-cell icon="exchange" title="我的订阅" >
-        <span
-          v-clipboard:copy="message"
-          v-clipboard:success="onCopy"
-          v-clipboard:error="onError"
-        >
+      <van-cell icon="exchange" title="我的订阅">
+        <span v-clipboard:copy="message" v-clipboard:success="onCopy" v-clipboard:error="onError">
           点击复制
         </span>
       </van-cell>
@@ -134,14 +130,32 @@
       <van-cell icon="bar-chart-o" title="网络带宽" value="1000Mbps" />
       <div style="width: 100%; height: 8px; background-color: rgb(245, 245, 245)"></div>
 
-      <van-cell icon="friends-o" title="联系客服" is-link @click="logout" />
+      <van-cell icon="friends-o" title="联系客服" is-link @click="actionShow=true" />
       <van-cell icon="question-o" title="使用教程" is-link @click="logout" />
       <van-cell icon="down" title="软件下载" is-link @click="logout" />
 
       <!-- <div style="width: 100%; height: 8px; background-color: rgb(245, 245, 245)"></div> -->
       <van-cell icon="warning-o" title="退出登录" is-link @click="onLogout" />
+      <van-action-sheet v-model:show="actionShow">
+        <div style="height: 152px;  text-align: center;">
+          <div style="height: 50px; line-height: 50px; font-size: 12px; color: #999;border-bottom: 1px solid #efefef;">选择联系方式，点击复制</div>
 
+          <div style="height: 50px; line-height: 50px; font-size: 16px; border-bottom: 1px solid #efefef;" @click="actionShow=false"> 
+            <span
+              v-clipboard:copy="tg" v-clipboard:success="onCopy1" v-clipboard:error="onError">
+              TG：https://t.me/ionoionoi
+            </span>
+          </div>
+          <div style="height: 50px; line-height: 50px;font-size: 16px;border-bottom: 1px solid #efefef;"  @click="actionShow=false">
+            <span
+              v-clipboard:copy="email" v-clipboard:success="onCopy2" v-clipboard:error="onError">
+              邮箱：niuniuwork387@gmail.com
+            </span>
+            </div>
+        </div>
+      </van-action-sheet>
     </van-cell-group>
+
     <!-- <div style="position: absolute; z-index: 999;left: 0;bottom: 0;">
             <van-tabbar v-model="activeFooter" active-color="#32AE57">
                 <van-tabbar-item icon="home-o" replace to="/index">首页</van-tabbar-item>

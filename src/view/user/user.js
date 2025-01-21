@@ -1,10 +1,11 @@
 import userApi from '@/api/user'
 import store from '@/store'
 
-import { Cell, CellGroup, Col, Icon, Row, Tabbar, TabbarItem, Toast, Dialog, Image,Tag } from 'vant';
+import { Cell,ActionSheet, CellGroup, Col, Icon, Row, Tabbar, TabbarItem, Toast, Dialog, Image,Tag } from 'vant';
 
 export default {
     components: {
+        [ActionSheet.name]: ActionSheet,
         [Tag.name]: Tag,
         [Row.name]: Row,
         [Col.name]: Col,
@@ -20,9 +21,17 @@ export default {
     },
     data() {
         return {
+            tg:'https://t.me/ionoionoi',
+            email:'niuniuwork387@gmail.com',
+            actionShow: false,
             activeFooter: 3,
             user: {},
-            message: '测试内容'
+            message: '测试内容',
+            actions : [
+                { name: '选项一' },
+                { name: '选项二' },
+                { name: '选项三' },
+              ]
         }
     },
     mounted() {
@@ -30,9 +39,26 @@ export default {
     },
     methods: {
         onCopy: function (e) {
+            this.actionShow = false
             Toast('复制成功，请使用clash/小火箭手动导入订阅')
+            this.actionShow = false
           },
           onError: function (e) {
+            this.actionShow = false
+
+            Toast('复制失败')
+          },
+          onCopy1: function (e) {
+            Toast('复制客服TG成功')
+          },
+          onError1: function (e) {
+            Toast('复制失败')
+          },
+
+          onCopy2: function (e) {
+            Toast('复制客服邮箱成功')
+          },
+          onError2: function (e) {
             Toast('复制失败')
           },
         copyLink(){
@@ -92,6 +118,15 @@ export default {
             } else {
                 this.redirectForCode();
             }
+        },
+        service(){
+            this.$dialog.alert({
+                title: '联系客服',
+                message: 'TG：https://t.me/ionoionoi  \n邮箱：niuniuwork387@gmail.com ',
+                confirmButtonColor: '#32AE57'
+              }).then(() => {
+                // on close
+              });
         },
         onLogout() {
             this.$dialog.confirm({
