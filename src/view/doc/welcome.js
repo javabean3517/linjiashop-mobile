@@ -6,6 +6,7 @@ import store from '@/store'
 import storage  from '@/utils/storage'
 const baseApi = process.env.VUE_APP_BASE_API
 import {
+    ActionSheet,
     Card,
     Cell,
     CellGroup,
@@ -29,6 +30,8 @@ import {
 
 export default {
     components: {
+        [ActionSheet.name]: ActionSheet,
+        
         [Sidebar.name]: Sidebar,
         [SidebarItem.name]: SidebarItem,
         [Row.name]: Row,
@@ -70,58 +73,36 @@ export default {
             },
             count: 0,
             isLoading: false,
+            browserHeight:0,
+            tg:'https://t.me/ionoionoi',
+            email:'niuniuwork387@gmail.com',
+            nntg:'https://t.me/sixvpnbot',
+            nngp:'https://t.me/niuniu6vpn',
+            actionShow: false,
         }
     },
     mounted() {
-        let activeNav = sessionStorage.getItem('activeNav')
-        if(activeNav && activeNav.length>0){
-            this.activeNav = activeNav
-        }
         this.init()
-        if(navigator.userAgent.indexOf("Windows")>-1){
-            this.ispc = true
-          }else{
-            this.ispc = false
-          }
+        this.updateBrowserHeight();
+        window.addEventListener('resize', this.updateBrowserHeight);
 
     },
     methods: {
+        updateBrowserHeight() {
+            this.browserHeight = window.innerHeight;
+          },
         init() {
-            this.queryCates()
-            this.queryGoods()
-        },
-        queryCates(){
-            let navList = sessionStorage.getItem('navList')
-            if(navList && navList.length>0){
-                
-                this.navList = JSON.parse(navList)
-                return
-            }
-            categoryApi.getAllCategories().then(response => {
-                this.navList = response.content
-                sessionStorage.setItem('navList',JSON.stringify(response.content))
-            }).catch((err) => {
-                Toast.fail(err);
-            })
+            // this.queryCates()
+            // this.queryGoods()
         },
 
-        queryGoods() {
-            let key = 'hotList-'+this.activeNav
-            let hotList = sessionStorage.getItem(key)
-            if(hotList && hotList.length>0){
-                this.hotList = JSON.parse(hotList)
-                return
-            }
-            goodsApi.search(this.activeNav).then(response => {
-                let list = response.content
-                this.hotList = list
-                sessionStorage.setItem(key ,JSON.stringify(this.hotList))
-
-            }).catch((err) => {
-                Toast(err)
-            })
-
-        },
+        onCopy1: function (e) {
+            Toast('复制成功')
+            // console.log(e)
+          },
+          onError: function (e) {
+            Toast('复制失败')
+          },
         clickNav(index, title) {
             console.log(index)
             console.log(title)
@@ -131,48 +112,6 @@ export default {
             console.log(index)
             console.log(p2)
         },
-        viewGoodsDetail(id) {
-            this.$router.push({path: '/goods/'+id})
-        },
-        formatPrice(price) {
-            return (price / 100).toFixed(2)
-        },
-        toTopic(id) {
-            this.$router.push({path: '/topic/'+id})
-        },
-        processOpenid() {
-            let url = window.location.href;
-            if (url.indexOf('code') > -1) {
-                const code = url.split('code=')[1].split("&")[0];
-                wechatApi.getWxOpenId({
-                    "code": code
-                }).then(res => {
-                    store.dispatch('app/toggleToken',res.data.token)
-                    store.dispatch('app/toggleUser',res.data.user)
-                    storage.set('chosenAddressId','')
-                })
-
-            } else {
-                this.redirectForCode();
-            }
-        },
-        redirectForCode() {
-            wechatApi.getWxSign({
-                "url": window.location.href
-            }).then(res => {
-                const rr = res.data;
-                const redirectUrl = window.location.href;
-                let param = 'appid=' + rr.appId
-                param += '&response_type=code'
-                param += '&scope=snsapi_base'
-                param += '&redirect_uri=' + encodeURIComponent(redirectUrl)
-                param += '&state=linjiashop#wechat_redirect'
-                console.log('url:', 'https://open.weixin.qq.com/connect/oauth2/authorize?' + param)
-                window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?' + param
-            }).catch(err => {
-
-            })
-        }
 
     }
 };

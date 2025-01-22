@@ -137,23 +137,35 @@
       <!-- <div style="width: 100%; height: 8px; background-color: rgb(245, 245, 245)"></div> -->
       <van-cell icon="warning-o" title="退出登录" is-link @click="onLogout" />
       <van-action-sheet v-model:show="actionShow">
-        <div style="height: 152px;  text-align: center;">
-          <div style="height: 50px; line-height: 50px; font-size: 12px; color: #999;border-bottom: 1px solid #efefef;">选择联系方式，点击复制</div>
+            <div style="height: 152px;  text-align: center;">
+            <div style="height: 50px; line-height: 50px; font-size: 12px; color: #999;border-bottom: 1px solid #efefef;">选择联系方式，点击复制</div>
 
-          <div style="height: 50px; line-height: 50px; font-size: 16px; border-bottom: 1px solid #efefef;" @click="actionShow=false"> 
-            <span
-              v-clipboard:copy="tg" v-clipboard:success="onCopy1" v-clipboard:error="onError">
-              TG：https://t.me/ionoionoi
-            </span>
-          </div>
-          <div style="height: 50px; line-height: 50px;font-size: 16px;border-bottom: 1px solid #efefef;"  @click="actionShow=false">
-            <span
-              v-clipboard:copy="email" v-clipboard:success="onCopy2" v-clipboard:error="onError">
-              邮箱：niuniuwork387@gmail.com
-            </span>
+            <div style="height: 50px; line-height: 50px; font-size: 16px; border-bottom: 1px solid #efefef;" @click="actionShow=false"> 
+                <span
+                v-clipboard:copy="tg" v-clipboard:success="onCopy1" v-clipboard:error="onError">
+                客服TG：https://t.me/ionoionoi
+                </span>
             </div>
-        </div>
-      </van-action-sheet>
+            <div style="height: 50px; line-height: 50px;font-size: 16px;border-bottom: 1px solid #efefef;"  @click="actionShow=false">
+                <span
+                v-clipboard:copy="email" v-clipboard:success="onCopy1" v-clipboard:error="onError">
+                客服邮箱：niuniuwork387@gmail.com
+                </span>
+                </div>
+            </div>
+            <div style="height: 50px; line-height: 50px; font-size: 16px; border-bottom: 1px solid #efefef; text-align: center;" @click="actionShow=false" > 
+                <span
+                v-clipboard:copy="nntg" v-clipboard:success="onCopy1" v-clipboard:error="onError">
+                官方机器人：https://t.me/sixvpnbot
+                </span>
+            </div>
+            <div style="height: 50px; line-height: 50px; font-size: 16px; border-bottom: 1px solid #efefef; text-align: center;" @click="actionShow=false"> 
+                <span
+                v-clipboard:copy="nngp" v-clipboard:success="onCopy1" v-clipboard:error="onError">
+                官方公开群：https://t.me/niuniu6vpn
+                </span>
+            </div>
+        </van-action-sheet>
     </van-cell-group>
 
     <!-- <div style="position: absolute; z-index: 999;left: 0;bottom: 0;">

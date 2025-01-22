@@ -49,7 +49,7 @@ export default {
             Toast('复制失败')
           },
           onCopy1: function (e) {
-            Toast('复制客服TG成功')
+            Toast('复制成功')
           },
           onError1: function (e) {
             Toast('复制失败')
