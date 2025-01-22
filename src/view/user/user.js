@@ -1,10 +1,14 @@
 import userApi from '@/api/user'
 import store from '@/store'
 
-import { Cell,ActionSheet, CellGroup, Col, Icon, Row, Tabbar, TabbarItem, Toast, Dialog, Image,Tag } from 'vant';
+import { Cell,ActionSheet,Grid,GridItem , CellGroup, Col, Icon, Row, Tabbar, TabbarItem, Toast, Dialog, Image,Tag } from 'vant';
 
 export default {
     components: {
+        [Grid.name]: Grid,
+
+        [GridItem.name]: GridItem,
+
         [ActionSheet.name]: ActionSheet,
         [Tag.name]: Tag,
         [Row.name]: Row,
@@ -26,6 +30,7 @@ export default {
             actionShow: false,
             activeFooter: 3,
             user: {},
+            downShow: false,
             message: '测试内容',
             actions : [
                 { name: '选项一' },
@@ -38,6 +43,10 @@ export default {
         this.init()
     },
     methods: {
+        clickIos(){
+            console.log(1111111111111111)
+            Toast('请联系客服索要外服苹果ID下载')
+        },
         onCopy: function (e) {
             this.actionShow = false
             Toast('复制成功，请使用clash/小火箭手动导入订阅')

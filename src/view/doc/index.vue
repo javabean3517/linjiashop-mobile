@@ -32,7 +32,7 @@
 
                     <van-sidebar-item title="机器人">
 
-                        </van-sidebar-item>
+                    </van-sidebar-item>
                 </van-sidebar>
             </div>
             <div style="width: 75%; margin: 20px auto;">
@@ -40,7 +40,8 @@
                     <div style="font-weight: 600; font-size: 16px; text-align: center;">
                         用户使用规范
                     </div>
-                    <div style="padding: 10px; height: 450px;overflow:auto;font-size: 14px; color: #646566;">
+                    <div :style="{ height: browserHeight - 260 + 'px' }"
+                        style="padding: 10px;overflow:auto;font-size: 14px; color: #646566;">
                         <p> 作为我们网络社区的一员，您必须负责任地使用您的互联网接入，下列构成违反本 用户使用规范的行为：
                         </p>
                         <p>①传播或散布病毒、木马、外挂、破解、病毒、网赚、诈骗、钓鱼网站、武器、儿童色情、种族歧视、非法游行、血腥暴恐、侵犯版权、危害国家安全和信誉等内容或相关内容。</p>
@@ -60,60 +61,122 @@
                         <van-tabs v-model:active="active">
                             <van-tab title="安卓">
 
-                                <div
-                                    style="padding: 10px; height: 550px;overflow:auto;font-size: 14px; color: #646566;">
+                                <div :style="{ height: browserHeight - 260 + 'px' }"
+                                    style="padding: 10px;overflow:auto;font-size: 14px; color: #646566;">
                                     <div style="font-size: 16px; text-align: center; margin: 10px;">
-                                    一、自动导入{{ browserHeight }}
-                                </div>
-                                    <div>1、我们推荐的客户端	</div>
-                                    <div style="margin-top: 6px; width: 96%; display: flex; justify-content: space-between;">
-                                        <div>Clash For Android</div>
-                                        <div><a href="http://yyds.niuniuvpn.com:9999/image/Clash-for-Windows-0.20.16-x64-CN.7z">立即下载</a></div>
-                                    </div>
-                                    <div  style="margin-top: 10px;">
-                                        2、导入订阅
-                                    </div>
-                                    <div  style="margin-top: 4px;">
-                                        自动导入仅适用本设备使用，导入路径为网页端→进入我的→安卓导入
-                                    </div>
-                                    <!-- <div style="text-align: center;margin-top: 10px;">
-                                        <img style=" height: 350px; width: 250px;" src="../../assets/img/1.png"/>
-                                    </div> -->
-                                    <div  style="margin-top: 10px;">
-                                        3、跳转Clash，保存订阅
-                                    </div>
-                                    <div  style="margin-top: 4px;">
-                                        点击导入后，会自动打开clash跳转配置页，自动更新设置1440分钟，配置名称填写牛牛，点击右上角保存按钮
-                                    </div>
 
-                                    <div  style="margin-top: 10px;">
-                                        4、选择牛牛订阅
                                     </div>
-                                    <div  style="margin-top: 4px;">
-                                        保存后返回配置页面，选择最近导入的订阅
+                                    <div style="text-align: center;">我们推荐使用的客户端</div>
+                                    <div
+                                        style="line-height: 26px; display: flex; justify-content: space-between; margin-top: 10px;">
+                                        <div>
+                                            苹果系统：Shadowrocket(小火箭)
+                                            <br />
+                                            安卓系统：Clash for Android
+                                            <br />
+                                            WINDOWS：Clash for Windwos
+                                            <br />
+                                            MACOS：ClashX
+                                            <br />
+                                        </div>
+                                        <div>
+                                            <a href="#" @click="actionShow = true">找客服</a>
+                                            <br />
+                                            <a href="#" @click="downShow = true">下载</a><br />
+                                            <a href="#" @click="downShow = true">下载</a><br />
+                                            <a href="#" @click="downShow = true">下载</a><br />
+                                        </div>
                                     </div>
-                                    <div  style="margin-top: 10px;">
-                                        5、返回首页，启动VPN
-                                    </div>
-                                    <div  style="margin-top: 4px;">
-                                        返回首页后，点击“已停止”，点击后成为“运行中”，一般到这一步就可以使用了。如果不能使用，就需要点击代理，从中选择一个能用的节点
-                                    </div>
-                                    <div style="width: 100%; height: 400px; padding-top: 20px;">
-                                        <video controls src="../../assets/img/339959c5f679e84062e73d1eab64c27e.mp4" style="width: 100%; height: 400px;"></video>
+                                    <div style="height: 300px; width: 250px; margin-top: 10px;">
+  
+                                        <viewer>
+
+                                            <img style="height: 300px; width: 250px;" src="../../assets/img/图片1.png" alt="">
+                                            </viewer>
                                     </div>
                                 </div>
 
                             </van-tab>
                             <van-tab title="苹果">
-                                <div
-                                    style="padding: 10px; height: 550px;overflow:auto;font-size: 14px; color: #646566;">
+                                <div :style="{ height: browserHeight - 260 + 'px' }"
+                                    style="padding: 10px;overflow:auto;font-size: 14px; color: #646566;">
+                                    <div style="font-size: 16px; text-align: center; margin: 10px;">
 
+                                    </div>
+                                    <div style="text-align: center;">我们推荐使用的客户端</div>
+                                    <div
+                                        style="line-height: 26px; display: flex; justify-content: space-between; margin-top: 10px;">
+                                        <div>
+                                            苹果系统：Shadowrocket(小火箭)
+                                            <br />
+                                            安卓系统：Clash for Android
+                                            <br />
+                                            WINDOWS：Clash for Windwos
+                                            <br />
+                                            MACOS：ClashX
+                                            <br />
+                                        </div>
+                                        <div>
+                                            <a href="#" @click="actionShow = true">找客服</a>
+                                            <br />
+                                            <a href="#" @click="downShow = true">下载</a><br />
+                                            <a href="#" @click="downShow = true">下载</a><br />
+                                            <a href="#" @click="downShow = true">下载</a><br />
+                                        </div>
+                                    </div>
+                                    <div style="height: 300px; width: 250px; margin-top: 10px;">
+                                        <viewer>
+
+                                        <img style="height: 300px; width: 250px;" src="../../assets/img/图片2.png" alt="">
+                                        </viewer>
+                                    </div>
                                 </div>
                             </van-tab>
                             <van-tab title="WINDOWS">
-                                <div
-                                    style="padding: 10px; height: 450px;overflow:auto;font-size: 14px; color: #646566;">
+                                <div :style="{ height: browserHeight - 260 + 'px' }"
+                                    style="padding: 10px;overflow:auto;font-size: 14px; color: #646566;">
+                                    <div style="font-size: 16px; text-align: center; margin: 10px;">
 
+                                    </div>
+                                    <div style="text-align: center;">我们推荐使用的客户端</div>
+                                    <div
+                                        style="line-height: 26px; display: flex; justify-content: space-between; margin-top: 10px;">
+                                        <div>
+                                            苹果系统：Shadowrocket(小火箭)
+                                            <br />
+                                            安卓系统：Clash for Android
+                                            <br />
+                                            WINDOWS：Clash for Windwos
+                                            <br />
+                                            MACOS：ClashX
+                                            <br />
+                                        </div>
+                                        <div>
+                                            <a href="#" @click="actionShow = true">找客服</a>
+                                            <br />
+                                            <a href="#" @click="downShow = true">下载</a><br />
+                                            <a href="#" @click="downShow = true">下载</a><br />
+                                            <a href="#" @click="downShow = true">下载</a><br />
+                                        </div>
+                                    </div>
+                                    <div style="height: 1800px; width: 250px; margin-top: 10px;">
+                                        <viewer>
+
+
+                                            <img style="height: 300px; width: 250px;" src="../../assets/img/图片3.png"
+                                                alt="">
+                                            <img style="height: 300px; width: 250px;" src="../../assets/img/图片4.png"
+                                                alt="">
+                                            <img style="height: 300px; width: 250px;" src="../../assets/img/图片5.png"
+                                                alt="">
+                                            <img style="height: 300px; width: 250px;" src="../../assets/img/图片6.png"
+                                                alt="">
+                                            <img style="height: 300px; width: 250px;" src="../../assets/img/图片7.png"
+                                                alt="">
+                                            <img style="height: 300px; width: 250px;" src="../../assets/img/图片8.png"
+                                                alt="">
+                                        </viewer>
+                                    </div>
                                 </div>
                             </van-tab>
                         </van-tabs>
@@ -123,7 +186,8 @@
                     <div style="font-weight: 600; font-size: 16px; text-align: center;">
                         套餐解释
                     </div>
-                    <div style="padding: 10px; height: 450px;overflow:auto;font-size: 14px; color: #646566;">
+                    <div :style="{ height: browserHeight - 260 + 'px' }"
+                        style="padding: 10px; overflow:auto;font-size: 14px; color: #646566;">
                         <p> 1.一元试用。该套餐为体验套餐，如果试用体验可以，建议购买常规套餐性价比更高。
                         </p>
                         <p>2.常规套餐。该套餐为传统常规套餐，可按照月、季、半年、年购买。流量从购买日开始，每个月发放套餐流量。如未到流量发放日，中途流量用完，可购买流量补充包，补充当月流量。</p>
@@ -141,7 +205,8 @@
                     <div style="font-weight: 600; font-size: 16px; text-align: center;">
                         断网急救
                     </div>
-                    <div style="padding: 10px; height: 450px;overflow:auto;font-size: 14px; color: #646566;">
+                    <div :style="{ height: browserHeight - 260 + 'px' }"
+                        style=" height: 450px;overflow:auto;font-size: 14px; color: #646566;">
                         <p> 1.是不是很久没有更新订阅信息了（更新的时候记得要关掉VPN再更新）
                         </p>
                         <p>2.是不是订阅已到期或流量用完。(官网、机器人、订阅列表更新后均有显示余量)</p>
@@ -162,26 +227,27 @@
                     <div style="font-weight: 600; font-size: 16px; text-align: center; color: black;">
                         其他问题
                     </div>
-                    <div style="padding: 10px; height: 450px;overflow:auto;font-size: 14px; color: #646566;">
+                    <div :style="{ height: browserHeight - 260 + 'px' }"
+                        style="padding: 10px; overflow:auto;font-size: 14px; color: #646566;">
 
                         <p style="color: black;font-size: 16px;"> 一、导入订阅报错怎么办
                         </p>
                         <div>
-                            1.检查是否是最新的订阅链接，可以到官网或者官方机器人的个人中心处获取最新链接 <br/>
+                            1.检查是否是最新的订阅链接，可以到官网或者官方机器人的个人中心处获取最新链接 <br />
                             2.导入订阅时需要把VPN关闭后再导入。
                         </div>
                         <p style="color: black;font-size: 16px;"> 二、我的节点怎么都是红的
                         </p>
                         <div>
-                            1.检查刷新节点时VPN是否有关闭后再刷新的<br/>
-                            2.检查套餐流量是不是用完了<br/>
-                            3.检查是不是套餐已经过期了<br/>
+                            1.检查刷新节点时VPN是否有关闭后再刷新的<br />
+                            2.检查套餐流量是不是用完了<br />
+                            3.检查是不是套餐已经过期了<br />
                         </div>
                         <p style="color: black; font-size: 16px;"> 三、不能付款怎么办
                         </p>
                         <div>
                             1.尝试付款时VPN需要先关闭后再点击付款链接
-                            <br/>
+                            <br />
                             2.如果还是打不开，请联系客服生成专属付款二维码
                         </div>
 
@@ -190,24 +256,21 @@
                         <div>我们推荐使用的客户端</div>
                         <div style="line-height: 26px; display: flex; justify-content: space-between;">
                             <div>
-
-                                
-
                                 苹果系统：Shadowrocket(小火箭)
-                                <br/>
+                                <br />
                                 安卓系统：Clash for Android
-                                <br/>
+                                <br />
                                 WINDOWS：Clash for Windwos
-                                <br/>
+                                <br />
                                 MACOS：ClashX
-                                <br/>
+                                <br />
                             </div>
                             <div>
-                                <a href="#">找客服</a>
-                                <br/>
-                                <a href="#">下载</a><br/>
-                                <a href="#">下载</a><br/>
-                                <a href="#">下载</a><br/>
+                                <a href="#" @click="actionShow = true">找客服</a>
+                                <br />
+                                <a href="#" @click="downShow = true">下载</a><br />
+                                <a href="#" @click="downShow = true">下载</a><br />
+                                <a href="#" @click="downShow = true">下载</a><br />
                             </div>
 
                         </div>
@@ -215,15 +278,16 @@
                 </div>
 
                 <div v-if="activeNav == 5">
-                    <div style="font-weight: 600; font-size: 16px; text-align: center;">
+                    <div style="font-size: 16px; text-align: center;">
                         牛牛机器人介绍
                     </div>
-                    <div style="padding: 10px; height: 450px;overflow:auto;font-size: 14px; color: #646566;">
-                        <p>除了牛牛官网，我们还提供了电报机器人 
+                    <div :style="{ height: browserHeight - 260 + 'px' }" 
+                    style="padding: 10px; height: 450px;overflow:auto;font-size: 14px; color: #646566;">
+                        <p>除了牛牛官网，我们还提供了电报机器人
                         </p>
                         <p>机器人除了具备官网下单、查流量、导入等功能，同时具备套餐过期提醒、流量使用提醒、签到送流量、获取官网登陆验证码等功能，我们强烈建议您关注牛牛机器人</p>
                         <p>除此之外，我们还有真人客服7x24在线服务，群组签到送流量等福利</p>
-                        <p><a href="#" @click="actionShow=true">更多福利，尽在TG</a></p>
+                        <p><a href="#" @click="actionShow = true">更多福利，尽在TG</a></p>
 
                     </div>
 
@@ -232,33 +296,64 @@
         </div>
         <van-action-sheet v-model:show="actionShow">
             <div style="height: 152px;  text-align: center;">
-            <div style="height: 50px; line-height: 50px; font-size: 12px; color: #999;border-bottom: 1px solid #efefef;">选择联系方式，点击复制</div>
+                <div
+                    style="height: 50px; line-height: 50px; font-size: 12px; color: #999;border-bottom: 1px solid #efefef;">
+                    选择联系方式，点击复制</div>
 
-            <div style="height: 50px; line-height: 50px; font-size: 16px; border-bottom: 1px solid #efefef;" @click="actionShow=false"> 
-                <span
-                v-clipboard:copy="tg" v-clipboard:success="onCopy1" v-clipboard:error="onError">
-                客服TG：https://t.me/ionoionoi
-                </span>
-            </div>
-            <div style="height: 50px; line-height: 50px;font-size: 16px;border-bottom: 1px solid #efefef;"  @click="actionShow=false">
-                <span
-                v-clipboard:copy="email" v-clipboard:success="onCopy1" v-clipboard:error="onError">
-                客服邮箱：niuniuwork387@gmail.com
-                </span>
+                <div style="height: 50px; line-height: 50px; font-size: 16px; border-bottom: 1px solid #efefef;"
+                    @click="actionShow = false">
+                    <span v-clipboard:copy="tg" v-clipboard:success="onCopy1" v-clipboard:error="onError">
+                        客服TG：https://t.me/ionoionoi
+                    </span>
+                </div>
+                <div style="height: 50px; line-height: 50px;font-size: 16px;border-bottom: 1px solid #efefef;"
+                    @click="actionShow = false">
+                    <span v-clipboard:copy="email" v-clipboard:success="onCopy1" v-clipboard:error="onError">
+                        客服邮箱：niuniuwork387@gmail.com
+                    </span>
                 </div>
             </div>
-            <div style="height: 50px; line-height: 50px; font-size: 16px; border-bottom: 1px solid #efefef; text-align: center;" @click="actionShow=false" > 
-                <span
-                v-clipboard:copy="nntg" v-clipboard:success="onCopy1" v-clipboard:error="onError">
-                官方机器人：https://t.me/sixvpnbot
+            <div style="height: 50px; line-height: 50px; font-size: 16px; border-bottom: 1px solid #efefef; text-align: center;"
+                @click="actionShow = false">
+                <span v-clipboard:copy="nntg" v-clipboard:success="onCopy1" v-clipboard:error="onError">
+                    官方机器人：https://t.me/sixvpnbot
                 </span>
             </div>
-            <div style="height: 50px; line-height: 50px; font-size: 16px; border-bottom: 1px solid #efefef; text-align: center;" @click="actionShow=false"> 
-                <span
-                v-clipboard:copy="nngp" v-clipboard:success="onCopy1" v-clipboard:error="onError">
-                官方公开群：https://t.me/niuniu6vpn
+            <div style="height: 50px; line-height: 50px; font-size: 16px; border-bottom: 1px solid #efefef; text-align: center;"
+                @click="actionShow = false">
+                <span v-clipboard:copy="nngp" v-clipboard:success="onCopy1" v-clipboard:error="onError">
+                    官方公开群：https://t.me/niuniu6vpn
                 </span>
             </div>
+        </van-action-sheet>
+
+
+
+        <van-action-sheet v-model:show="downShow">
+            <van-grid :border="false" :column-num="3">
+
+
+                <van-grid-item style="text-align: center;" @click="clickIos">
+                    <a href="#" style="font-size: 14px;color: black;">
+                        <img style="width: 40px; height: 40px;" src="../../assets/img/小火箭.png" />
+                        <div style="margin-top: 8px;">小火箭</div>
+                    </a>
+                </van-grid-item>
+                <van-grid-item style="text-align: center;">
+                    <a href="http://yyds.niuniuvpn.com:9999/image/cfa-2.5.12-foss-universal-release.apk"
+                        style="font-size: 14px;color: black;">
+                        <img style="width: 40px; height: 40px;" src="../../assets/img/clash.png" />
+                        <div style="margin-top: 8px;">安卓Clash</div>
+                    </a>
+                </van-grid-item>
+                <van-grid-item style="text-align: center;">
+                    <a href="http://yyds.niuniuvpn.com:9999/image/Clash-for-Windows-0.20.16-x64-CN.7z"
+                        style="font-size: 14px;color: black;">
+                        <img style="width: 40px; height: 40px;" src="../../assets/img/win.png" />
+                        <div style="margin-top: 8px;">Win Clash</div>
+                    </a>
+                </van-grid-item>
+            </van-grid>
         </van-action-sheet>
     </div>
 </template>

@@ -130,42 +130,77 @@
       <van-cell icon="bar-chart-o" title="网络带宽" value="1000Mbps" />
       <div style="width: 100%; height: 8px; background-color: rgb(245, 245, 245)"></div>
 
-      <van-cell icon="friends-o" title="联系客服" is-link @click="actionShow=true" />
-      <van-cell icon="question-o" title="使用教程" is-link @click="logout" />
-      <van-cell icon="down" title="软件下载" is-link @click="logout" />
+      <van-cell icon="friends-o" title="联系客服" is-link @click="actionShow = true" />
+      <van-cell icon="down" title="软件下载" is-link @click="downShow = true" />
 
       <!-- <div style="width: 100%; height: 8px; background-color: rgb(245, 245, 245)"></div> -->
       <van-cell icon="warning-o" title="退出登录" is-link @click="onLogout" />
       <van-action-sheet v-model:show="actionShow">
-            <div style="height: 152px;  text-align: center;">
-            <div style="height: 50px; line-height: 50px; font-size: 12px; color: #999;border-bottom: 1px solid #efefef;">选择联系方式，点击复制</div>
+        <div style="height: 152px;  text-align: center;">
+          <div style="height: 50px; line-height: 50px; font-size: 12px; color: #999;border-bottom: 1px solid #efefef;">
+            选择联系方式，点击复制</div>
 
-            <div style="height: 50px; line-height: 50px; font-size: 16px; border-bottom: 1px solid #efefef;" @click="actionShow=false"> 
-                <span
-                v-clipboard:copy="tg" v-clipboard:success="onCopy1" v-clipboard:error="onError">
-                客服TG：https://t.me/ionoionoi
-                </span>
-            </div>
-            <div style="height: 50px; line-height: 50px;font-size: 16px;border-bottom: 1px solid #efefef;"  @click="actionShow=false">
-                <span
-                v-clipboard:copy="email" v-clipboard:success="onCopy1" v-clipboard:error="onError">
-                客服邮箱：niuniuwork387@gmail.com
-                </span>
-                </div>
-            </div>
-            <div style="height: 50px; line-height: 50px; font-size: 16px; border-bottom: 1px solid #efefef; text-align: center;" @click="actionShow=false" > 
-                <span
-                v-clipboard:copy="nntg" v-clipboard:success="onCopy1" v-clipboard:error="onError">
-                官方机器人：https://t.me/sixvpnbot
-                </span>
-            </div>
-            <div style="height: 50px; line-height: 50px; font-size: 16px; border-bottom: 1px solid #efefef; text-align: center;" @click="actionShow=false"> 
-                <span
-                v-clipboard:copy="nngp" v-clipboard:success="onCopy1" v-clipboard:error="onError">
-                官方公开群：https://t.me/niuniu6vpn
-                </span>
-            </div>
-        </van-action-sheet>
+          <div style="height: 50px; line-height: 50px; font-size: 16px; border-bottom: 1px solid #efefef;"
+            @click="actionShow = false">
+            <span v-clipboard:copy="tg" v-clipboard:success="onCopy1" v-clipboard:error="onError">
+              客服TG：https://t.me/ionoionoi
+            </span>
+          </div>
+          <div style="height: 50px; line-height: 50px;font-size: 16px;border-bottom: 1px solid #efefef;"
+            @click="actionShow = false">
+            <span v-clipboard:copy="email" v-clipboard:success="onCopy1" v-clipboard:error="onError">
+              客服邮箱：niuniuwork387@gmail.com
+            </span>
+          </div>
+        </div>
+        <div
+          style="height: 50px; line-height: 50px; font-size: 16px; border-bottom: 1px solid #efefef; text-align: center;"
+          @click="actionShow = false">
+          <span v-clipboard:copy="nntg" v-clipboard:success="onCopy1" v-clipboard:error="onError">
+            官方机器人：https://t.me/sixvpnbot
+          </span>
+        </div>
+        <div
+          style="height: 50px; line-height: 50px; font-size: 16px; border-bottom: 1px solid #efefef; text-align: center;"
+          @click="actionShow = false">
+          <span v-clipboard:copy="nngp" v-clipboard:success="onCopy1" v-clipboard:error="onError">
+            官方公开群：https://t.me/niuniu6vpn
+          </span>
+        </div>
+      </van-action-sheet>
+
+
+
+      <van-action-sheet v-model:show="downShow" >
+        <van-grid :border="false" :column-num="3">
+            
+
+          <van-grid-item style="text-align: center;" @click="clickIos">
+            <a href="#" style="font-size: 14px;color: black;">
+              <img style="width: 40px; height: 40px;"
+              src="../../assets/img/小火箭.png"
+            />
+            <div style="margin-top: 8px;">小火箭</div>
+            </a>
+          </van-grid-item>
+          <van-grid-item  style="text-align: center;">
+            <a href="http://yyds.niuniuvpn.com:9999/image/cfa-2.5.12-foss-universal-release.apk" style="font-size: 14px;color: black;">
+              <img style="width: 40px; height: 40px;"
+              src="../../assets/img/clash.png"
+            />
+            <div style="margin-top: 8px;">安卓Clash</div>
+            </a>
+          </van-grid-item>
+          <van-grid-item style="text-align: center;">
+            <a href="http://yyds.niuniuvpn.com:9999/image/Clash-for-Windows-0.20.16-x64-CN.7z" style="font-size: 14px;color: black;">
+              <img style="width: 40px; height: 40px;"
+              src="../../assets/img/win.png"
+            />
+            <div style="margin-top: 8px;">Win Clash</div>
+            </a>
+          </van-grid-item>
+        </van-grid>
+      </van-action-sheet>
     </van-cell-group>
 
     <!-- <div style="position: absolute; z-index: 999;left: 0;bottom: 0;">
