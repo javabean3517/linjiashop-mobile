@@ -47,7 +47,7 @@ export default {
 
             if (this.payType === 'wxpay' || this.payType === 'alipay') {
                 const url = process.env.VUE_APP_BASE_API
-                window.open(url + "/mobile/pay/" + this.payType + "/" + this.order.orderSn)
+                window.open(url + "/pay/" + this.payType + "/" + this.order.orderSn)
                 return;
             }
             if (this.payType === 'usdt') {
