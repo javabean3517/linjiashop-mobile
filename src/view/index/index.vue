@@ -1,20 +1,14 @@
 <template>
 
     <div style="background-color: white;height: 100%; width: 100%;">
-        <div style="width: 100%;position: fixed;top:0px; z-index: 9999;">
-            <div>
-                <div style="width: 100%; height: 100px;background-color: white;">
-                    <img style=" height: 100px;" v-bind:class="{ 'pc1': ispc, 'mobile1': !ispc }" src="../../assets/img/logo.png">
 
-                </div>
-            </div>
-
+        <div v-bind:class="{ 'pc1': ispc, 'mobile1': !ispc }"
+            style="position: fixed;top:0px; z-index: 9999; height: 70px;background-color: #FF6903; color: white; font-size: 30px; text-align: center; line-height: 70px;">
+            {{ tenantName }}
         </div>
 
-
-
         <div
-            style="display: flex; justify-content: space-between; width: 100%;background-color: white; position: absolute;top:90px; left: 0px;">
+            style="display: flex; justify-content: space-between; width: 100%;background-color: white; position: absolute;top:70px; left: 0px;">
 
             <div style="width: 20%;">
                 <van-sidebar v-model="activeNav" @change="clickNav">
@@ -31,8 +25,9 @@
 
                     </div>
                     <div style="height: 100%;width: 64%; padding-left: 10px; padding-top: 4px; position: relative;">
-                        <div style="margin: 3px 0;padding-top: 2px; font-weight: 400; font-size: 17px; color: #323233;">{{
-                            goods.name }} </div>
+                        <div style="margin: 3px 0;padding-top: 2px; font-weight: 400; font-size: 17px; color: #323233;">
+                            {{
+                                goods.name }} </div>
                         <div style="margin-top: 6px; color: #969799; font-size: 13px;">
                             套餐流量：<span style="font-weight: 500;">{{ goods.bandwidth }}</span>
                             <!-- <span style="margin-left: 10%;">限速：100Mbps</span> -->
@@ -73,10 +68,12 @@
 <script src="./welcome.js"></script>
 
 <style lang="less">
-.pc1{
+.pc1 {
     width: 25%;
+    margin: 0 auto;
 }
-.mobile1{
+
+.mobile1 {
     width: 100%;
 }
 </style>

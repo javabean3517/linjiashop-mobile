@@ -25,7 +25,7 @@ export default {
         }
     },
     mounted() {
-      console.log(window.innerHeight)
+      console.log('appappappappappappappapp')
       if(navigator.userAgent.indexOf("Windows")>-1){
         this.ispc = true
         window.onload=function(){
@@ -38,7 +38,25 @@ export default {
       this.$router.push('/index');
       window.addEventListener('beforeunload', this.handleBeforeUnload);
 
+    },
+    watch: {
+      '$route'(to, from) {
+        if(to.path.indexOf('/index')>-1){
+          this.activeFooter = 0
+        }
+        if(to.path.indexOf('/doc')>-1){
+          this.activeFooter = 1
+        }
+        if(to.path.indexOf('/cart')>-1){
+          this.activeFooter = 2
+        }
+        if(to.path.indexOf('/login')>-1){
+          this.activeFooter = 3
+        }
+        console.log('to:'+to.path)
+        console.log('from:'+from.path)
 
+      }
     },
     methods:{
       handleBeforeUnload(event) {

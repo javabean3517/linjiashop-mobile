@@ -2,7 +2,7 @@ import userApi from '@/api/user'
 import store from '@/store'
 
 import { Cell,ActionSheet,Grid,GridItem , CellGroup, Col, Icon, Row, Tabbar, TabbarItem, Toast, Dialog, Image,Tag } from 'vant';
-
+import storage  from '@/utils/storage'
 export default {
     components: {
         [Grid.name]: Grid,
@@ -25,8 +25,9 @@ export default {
     },
     data() {
         return {
-            tg:'https://t.me/ionoionoi',
-            email:'niuniuwork387@gmail.com',
+            tg:'',
+            bot:'',
+            website:'',
             actionShow: false,
             activeFooter: 3,
             user: {},
@@ -84,25 +85,15 @@ export default {
             window.open(this.user.importLink)
         },
         init() {
-
             userApi.getUserInfo().then(response => {
                 const url = window.location.href
                 this.user = response.content
                 this.message = this.user.link
+                this.tg = this.user.contract
+                this.botUsername = this.user.botUsername
+                this.website = this.user.website
                 console.log(JSON.stringify(this.user))
                 store.dispatch('app/toggleUser', response.content)
-                // if(response.data.refreshWechatInfo === false){
-                //     return ;
-                // }
-                // if (url.indexOf('localhost') > -1 || url.indexOf('127.0.0.1') > -1) {
-                //     console.log('开发环境不获取openid')
-                // } else {
-                //     const userAgent = window.navigator.userAgent.toLowerCase()
-                //     //使用微信访问本系统的时候获取微信openid，否则不获取
-                //     if (userAgent.indexOf('micromessenger') >-1) {
-                //         this.processOpenid()
-                //     }
-                // }
             }).catch((err) => {
                 console.log('获取用户基本新失败', err)
                 this.$router.replace({ path: 'login', query: { redirect: 'user' } })

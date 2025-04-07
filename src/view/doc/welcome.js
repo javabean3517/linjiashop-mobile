@@ -5,6 +5,7 @@ import wechatApi from '@/api/wechat'
 import store from '@/store'
 import storage from '@/utils/storage'
 const baseApi = process.env.VUE_APP_BASE_API
+import userApi from '@/api/user'
 import {
     ActionSheet,
     Card,
@@ -62,6 +63,8 @@ export default {
     },
     data() {
         return {
+            user: undefined,
+            tenantName:'',
             ispc: false,
             loading: false,
             finished: false,
@@ -80,10 +83,9 @@ export default {
             count: 0,
             isLoading: false,
             browserHeight: 0,
-            tg: 'https://t.me/ionoionoi',
-            email: 'niuniuwork387@gmail.com',
-            nntg: 'https://t.me/sixvpnbot',
-            nngp: 'https://t.me/niuniu6vpn',
+            tg:'',
+            bot:'',
+            website:'',
             actionShow: false,
             downShow: false
         }
@@ -97,6 +99,11 @@ export default {
         } else {
             this.ispc = false
         }
+        const tenant = storage.get('tenant')
+        console.log('tenant:'+tenant)
+        
+        this.tenantName = JSON.parse(tenant).name
+        
 
     },
     methods: {
@@ -108,8 +115,16 @@ export default {
             this.browserHeight = window.innerHeight;
         },
         init() {
-            // this.queryCates()
-            // this.queryGoods()
+            userApi.getUserInfo().then(response => {
+                this.user = response.content
+                this.message = this.user.link
+                this.tg = this.user.contract
+                this.botUsername = this.user.botUsername
+                this.website = this.user.website
+            }).catch((err) => {
+                console.log('获取用户基本新失败', err)
+                this.$router.replace({ path: 'login', query: { redirect: 'user' } })
+            })
         },
 
         onCopy1: function (e) {

@@ -1,6 +1,5 @@
 import categoryApi from '@/api/category'
 import goodsApi from '@/api/goods'
-import topicApi from '@/api/topic'
 import wechatApi from '@/api/wechat'
 import store from '@/store'
 import storage  from '@/utils/storage'
@@ -53,6 +52,7 @@ export default {
     },
     data() {
         return {
+            tenantName: '',
             ispc: false,
             loading: false,
             finished: false,
@@ -74,6 +74,9 @@ export default {
         }
     },
     mounted() {
+        console.log(window.location.hostname);
+        console.log(window.location.port);
+
         let activeNav = sessionStorage.getItem('activeNav')
         if(activeNav && activeNav.length>0){
             this.activeNav = activeNav
@@ -90,6 +93,15 @@ export default {
         init() {
             this.queryCates()
             this.queryGoods()
+            this.getConfigs()
+
+        },
+        getConfigs(){
+            categoryApi.getConfig().then(res=>{
+                this.tenantName = res.content.name
+                storage.set('tenant',JSON.stringify(res.content))
+
+            })
         },
         queryCates(){
             let navList = sessionStorage.getItem('navList')

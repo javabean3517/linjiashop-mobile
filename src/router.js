@@ -28,7 +28,7 @@ const routes = [
         name: 'index',
         component: () => import('./view/index'),
         meta: {
-            title: '牛牛节点',keepAlive:true
+            title: '套餐购买',keepAlive:true
         }
     },
     {
@@ -143,6 +143,7 @@ routes.forEach(route => {
 const router = new Router({routes})
 
 router.beforeEach((to, from, next) => {
+    console.log('to:'+JSON.stringify(to))
     const title = to.meta && to.meta.title
     if (title) {
         document.title = title;

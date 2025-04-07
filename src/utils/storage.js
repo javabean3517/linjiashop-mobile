@@ -11,10 +11,17 @@ export default {
   },
   setUser:function(user){
     this.set('user',JSON.stringify(user))
-
   },
   getUser:function(){
     const user  = JSON.parse(this.get('user'))
+    return user
+  },
+
+  setTenant:function(user){
+    this.set('tenant',JSON.stringify(user))
+  },
+  getTenant:function(){
+    const user  = JSON.parse(this.get('tenant'))
     return user
   },
   removeToken:function(){

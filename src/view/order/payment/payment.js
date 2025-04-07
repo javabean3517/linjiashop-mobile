@@ -46,7 +46,7 @@ export default {
         pay() {
 
             if (this.payType === 'wxpay' || this.payType === 'alipay') {
-                const url = process.env.VUE_APP_BASE_API
+                const url = "http://web.niuniuvpn.com:20001/mobile"
                 window.open(url + "/pay/" + this.payType + "/" + this.order.orderSn)
                 return;
             }

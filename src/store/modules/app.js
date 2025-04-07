@@ -45,6 +45,9 @@ const actions = {
     toggleToken({ commit }, token) {
         commit('TOGGLE_TOKEN', token)
     },
+    toggleTenant({ commit }, tenant) {
+        commit('TOGGLE_TENANT', tenant)
+    },
 }
 
 export default {

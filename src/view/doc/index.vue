@@ -1,16 +1,12 @@
 <template>
 
     <div style="background-color: white;height: 100%; width: 100%;">
-        <div style="width: 100%;position: fixed;top:0px; z-index: 9999;">
-            <div>
-                <div style="width: 100%; height: 100px;background-color: white;">
-                    <img style=" height: 100px;" v-bind:class="{ 'pc1': ispc, 'mobile1': !ispc }"
-                        src="../../assets/img/logo.png">
-                </div>
-            </div>
+        <div v-bind:class="{ 'pc1': ispc, 'mobile1': !ispc }"
+            style="position: fixed;top:0px; z-index: 9999; height: 70px;background-color: #FF6903; color: white; font-size: 30px; text-align: center; line-height: 70px;">
+            {{ tenantName }}
         </div>
         <div
-            style="display: flex; justify-content: space-between; width: 100%;background-color: white; position: absolute;top:90px; left: 0px;">
+            style="display: flex; justify-content: space-between; width: 100%;background-color: white; position: absolute;top:70px; left: 0px;">
 
             <div style="width: 20%;">
                 <van-sidebar v-model="activeNav" @change="clickNav">
@@ -52,7 +48,7 @@
                         <p> ④用户被发现有在系统中进行非法行为的，包括但不限于破坏系统运行、试图改变系统配置或破坏系统安全、运行影响网站服务器的程序、进程、支付欺诈等
                         </p>
                         <p>⑤有意或无意泄露账号、订阅、服务器配置信息、服务器地址(IP和域名)</p>
-                        一旦发现您有此类行为，您的帐户会被暂停、冻结、或删除，并不退款。牛牛6元机场保留随时以任何方式修订、修订或修改此用户使用条款和协议的权利。
+                        一旦发现您有此类行为，您的帐户会被暂停、冻结、或删除，并不退款。{{ user.tenantName }}保留随时以任何方式修订、修订或修改此用户使用条款和协议的权利。
                     </div>
                 </div>
 
@@ -88,11 +84,12 @@
                                         </div>
                                     </div>
                                     <div style="height: 300px; width: 250px; margin-top: 10px;">
-  
+
                                         <viewer>
 
-                                            <img style="height: 300px; width: 250px;" src="../../assets/img/图片1.png" alt="">
-                                            </viewer>
+                                            <img style="height: 300px; width: 250px;" src="../../assets/img/图片1.png"
+                                                alt="">
+                                        </viewer>
                                     </div>
                                 </div>
 
@@ -127,7 +124,8 @@
                                     <div style="height: 300px; width: 250px; margin-top: 10px;">
                                         <viewer>
 
-                                        <img style="height: 300px; width: 250px;" src="../../assets/img/图片2.png" alt="">
+                                            <img style="height: 300px; width: 250px;" src="../../assets/img/图片2.png"
+                                                alt="">
                                         </viewer>
                                     </div>
                                 </div>
@@ -188,7 +186,7 @@
                     </div>
                     <div :style="{ height: browserHeight - 260 + 'px' }"
                         style="padding: 10px; overflow:auto;font-size: 14px; color: #646566;">
-                        <p> 1.一元试用。该套餐为体验套餐，如果试用体验可以，建议购买常规套餐性价比更高。
+                        <p> 1.试用套餐。该套餐为体验套餐，超低门槛，如果试用体验可以，建议购买常规套餐性价比更高。
                         </p>
                         <p>2.常规套餐。该套餐为传统常规套餐，可按照月、季、半年、年购买。流量从购买日开始，每个月发放套餐流量。如未到流量发放日，中途流量用完，可购买流量补充包，补充当月流量。</p>
 
@@ -279,13 +277,14 @@
 
                 <div v-if="activeNav == 5">
                     <div style="font-size: 16px; text-align: center;">
-                        牛牛机器人介绍
+                        {{ user.tenantName }}机器人介绍
                     </div>
-                    <div :style="{ height: browserHeight - 260 + 'px' }" 
-                    style="padding: 10px; height: 450px;overflow:auto;font-size: 14px; color: #646566;">
-                        <p>除了牛牛官网，我们还提供了电报机器人
+                    <div :style="{ height: browserHeight - 260 + 'px' }"
+                        style="padding: 10px; height: 450px;overflow:auto;font-size: 14px; color: #646566;">
+                        <p>除了{{ user.tenantName }}官网，我们还提供了电报机器人
                         </p>
-                        <p>机器人除了具备官网下单、查流量、导入等功能，同时具备套餐过期提醒、流量使用提醒、签到送流量、获取官网登陆验证码等功能，我们强烈建议您关注牛牛机器人</p>
+                        <p>机器人除了具备官网下单、查流量、导入等功能，同时具备套餐过期提醒、流量使用提醒、签到送流量、获取官网登陆验证码等功能，我们强烈建议您关注{{ user.tenantName }}机器人
+                        </p>
                         <p>除此之外，我们还有真人客服7x24在线服务，群组签到送流量等福利</p>
                         <p><a href="#" @click="actionShow = true">更多福利，尽在TG</a></p>
 
@@ -295,7 +294,7 @@
             </div>
         </div>
         <van-action-sheet v-model:show="actionShow">
-            <div style="height: 152px;  text-align: center;">
+            <div style="height: 102px;  text-align: center;">
                 <div
                     style="height: 50px; line-height: 50px; font-size: 12px; color: #999;border-bottom: 1px solid #efefef;">
                     选择联系方式，点击复制</div>
@@ -303,30 +302,23 @@
                 <div style="height: 50px; line-height: 50px; font-size: 16px; border-bottom: 1px solid #efefef;"
                     @click="actionShow = false">
                     <span v-clipboard:copy="tg" v-clipboard:success="onCopy1" v-clipboard:error="onError">
-                        客服TG：https://t.me/ionoionoi
-                    </span>
-                </div>
-                <div style="height: 50px; line-height: 50px;font-size: 16px;border-bottom: 1px solid #efefef;"
-                    @click="actionShow = false">
-                    <span v-clipboard:copy="email" v-clipboard:success="onCopy1" v-clipboard:error="onError">
-                        客服邮箱：niuniuwork387@gmail.com
+                        客服TG：{{ user.contract }}
                     </span>
                 </div>
             </div>
             <div style="height: 50px; line-height: 50px; font-size: 16px; border-bottom: 1px solid #efefef; text-align: center;"
                 @click="actionShow = false">
-                <span v-clipboard:copy="nntg" v-clipboard:success="onCopy1" v-clipboard:error="onError">
-                    官方机器人：https://t.me/sixvpnbot
+                <span v-clipboard:copy="bot" v-clipboard:success="onCopy1" v-clipboard:error="onError">
+                    官方机器人：{{ (user.botUsername == '' || user.botUsername == undefined) ? '敬请期待' : user.botUsername }}
                 </span>
             </div>
             <div style="height: 50px; line-height: 50px; font-size: 16px; border-bottom: 1px solid #efefef; text-align: center;"
                 @click="actionShow = false">
-                <span v-clipboard:copy="nngp" v-clipboard:success="onCopy1" v-clipboard:error="onError">
-                    官方公开群：https://t.me/niuniu6vpn
+                <span v-clipboard:copy="website" v-clipboard:success="onCopy1" v-clipboard:error="onError">
+                    官网:{{ user.website }}
                 </span>
             </div>
         </van-action-sheet>
-
 
 
         <van-action-sheet v-model:show="downShow">

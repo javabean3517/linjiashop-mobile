@@ -5,7 +5,7 @@
             <van-tab title="订阅登录" style="font-size: large;">
                 <van-cell-group inset>
                     <div style="color: #323233; margin: 15px; font-size: 22px; text-align: center;">
-                        <img style="width: 120px; height: 120px;" src="../../assets/img/1736557497122.jpg" />
+                        <img style="width: 120px; height: 120px;" src="../../assets/img/c.jpg" />
 
                         <div>订阅登录</div>
                     </div>
@@ -32,11 +32,11 @@
                     </van-button>
                 </div>
             </van-tab>
-            <van-tab title="TG验证码">
+            <van-tab title="TG验证码" v-if="isTgShow">
 
                 <van-cell-group inset>
                     <div style="color: #323233; margin: 15px; font-size: 22px; text-align: center;">
-                        <img style="width: 120px; height: 120px;" src="../../assets/img/1736557497122.jpg" />
+                        <img style="width: 120px; height: 120px;" src="../../assets/img/c.jpg" />
                         <div>TG验证码登录/注册</div>
 
                     </div>
@@ -72,7 +72,7 @@
             <van-tab title="注册/登录">
                 <van-cell-group inset>
                     <div style="color: #323233; margin: 15px; font-size: 22px; text-align: center;">
-                        <img style="width: 120px; height: 120px;" src="../../assets/img/1736557497122.jpg" />
+                        <img style="width: 120px; height: 120px;" src="../../assets/img/c.jpg" />
                         <div>{{ modeName }}</div>
                     </div>
                     <van-field v-model="account" name="账号" label-width="4em" label="账号" placeholder="请输入账号" />

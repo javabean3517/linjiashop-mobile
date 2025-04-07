@@ -27,6 +27,7 @@ export default {
     },
     data() {
         return {
+            isTgShow:false,
             uuid:'',
             showLoading: false,
             token:'',
@@ -171,11 +172,14 @@ export default {
         },
         getTgLink(){
             loginApi.getBotLink().then(res=>{
-                console.log(res.content.token)
+                if(res.content==undefined||res.content=='null'||res.content==null){
+                    return
+                }
+                this.isTgShow = true
                 this.token = res.content.token
                 this.tgLink = res.content.link+res.content.token
             }).catch(err=>{
-                Toast(err)
+                Toast(21321321321)
             })
         },
         toTg(){
