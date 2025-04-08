@@ -19,7 +19,8 @@ export default {
             user: {},
             order: {},
             payType: 'alipay',
-            ispc: false
+            ispc: false,
+            orderCreate:{}
         };
     },
     mounted() {
@@ -33,11 +34,18 @@ export default {
     computed: {},
     methods: {
         init() {
-            let orderSn = this.$route.query.orderSn
-            let totalPrice = this.$route.query.totalPrice
+    
+            // console.log('1111'+JSON.stringify( this.$route.query))
+            this.orderCreate =  this.$route.query
+            let orderSn = this.orderCreate.paymentId
+            let totalPrice = this.orderCreate.price
             this.order = { orderSn: orderSn, totalPrice: totalPrice }
+
+            if(this.orderCreate.channelType==2){
+                this.payType = 'qr'
+            }
+
             this.user = storage.getUser()
-            console.log('user:' + this.user)
 
         },
         onClickLeft() {
@@ -52,6 +60,9 @@ export default {
             }
             if (this.payType === 'usdt') {
                 this.$router.push({ path: 'usdt', query: { orderSn: this.order.orderSn } })
+            }
+            if (this.payType === 'qr') {
+                this.$router.push({ path: 'qr', query: { orderSn: this.order.orderSn } })
             }
             if (this.payType === 'balance') {
                 this.$dialog.confirm({

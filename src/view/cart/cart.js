@@ -91,7 +91,7 @@ export default {
             order.save(this.cartList[0].id).then( response => {
                 let order = response.content
                 console.log(order)
-                this.$router.push({path:'payment',query:{orderSn:order.paymentId,totalPrice:order.price}})
+                this.$router.push({path:'payment',query:order})
             })
             //提交订单后跳转支付
             // this.$router.push({path:'payment',query:{}})

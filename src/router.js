@@ -124,7 +124,14 @@ const routes = [
             title: '收银台'
         }
     },
-
+    {
+        name: 'qr',
+        component: () => import('./view/order/qr'),
+        meta: {
+            requireAuth: true,
+            title: '收银台'
+        }
+    },
 
     {
         name: 'cart',

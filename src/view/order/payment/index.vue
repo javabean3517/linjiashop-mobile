@@ -8,7 +8,7 @@
             </van-cell>
         </van-cell-group>
 
-        <van-radio-group v-model="payType">
+        <van-radio-group v-model="payType" v-if="orderCreate.channelType!=2">
             <van-cell-group>
                 <van-cell clickable @click="radio = 'alipay'">
                     <img style="height:32px;width:32px;" slot="icon" slot-scope="props"
@@ -36,6 +36,19 @@
                     <span style=" line-height: 32px; margin-left: 15px;">余额支付（余额￥{{user.money}}）</span>
                     <van-radio :disabled="user.money<order.totalPrice" slot="right-icon" name="balance"  style="padding-left:35%;" />
                 </van-cell>
+            </van-cell-group>
+        </van-radio-group>
+
+
+        <van-radio-group v-model="payType" v-if="orderCreate.channelType==2">
+            <van-cell-group>
+                <van-cell clickable @click="radio = 'qr'">
+                    <img style="height:32px;width:32px;" slot="icon" slot-scope="props"
+                        src="../../../assets/img/支付宝.png">
+                    <span style=" line-height: 32px; margin-left: 15px;">支付宝</span>
+                    <van-radio slot="right-icon" name="qr" style="padding-left:55%;" ></van-radio>
+                </van-cell>
+              
             </van-cell-group>
         </van-radio-group>
         <van-button class="footer"  v-bind:class="{ 'pc3': ispc }" type="primary" size="large" @click="pay">立即支付</van-button>

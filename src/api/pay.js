@@ -28,6 +28,13 @@ export default {
         })
     },
 
+    qrPay:function(orderSn){
+        return request({
+            url: '/qr/pay/' + orderSn,
+            method: 'get'
+        })
+    },
+
     balancePay:function(orderSn){
         return request({
             url: '/balance/' + orderSn,
